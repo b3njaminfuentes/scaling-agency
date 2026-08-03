@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAINT GROWTH — Growth Partners para Clínicas</title>
+<meta name="description" content="Diseñamos el sistema de adquisición de pacientes para clínicas dentales y médicas: tráfico de precisión, infraestructura de conversión y reporting sin humo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,340;9..144,440;9..144,560&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#12151c;
+    --ink-soft:#20262f;
+    --bone:#e7e3da;
+    --bone-soft:#f1eee6;
+    --paper:#faf9f5;
+    --gold:#a47c3b;
+    --gold-soft:#c9a968;
+    --gold-faint:rgba(164,124,59,.22);
+    --slate:#6b7280;
+    --max:1180px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important;}
+  }
+  body{
+    background:var(--bone);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 32px;}
+  a{color:inherit;}
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--gold);
+    font-weight:500;
+  }
+  h1,h2,h3{
+    font-family:'Fraunces',serif;
+    font-weight:340;
+    letter-spacing:-0.01em;
+    color:var(--ink);
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    background:var(--ink);
+    color:var(--bone-soft);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    padding:16px 28px;
+    border:1px solid var(--ink);
+    text-decoration:none;
+    cursor:pointer;
+    transition:background .25s ease, color .25s ease;
+  }
+  .btn:hover{background:transparent; color:var(--ink);}
+  .btn:focus-visible{outline:2px solid var(--gold); outline-offset:3px;}
+
+  /* ===== NAV ===== */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(231,227,218,.85);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--gold-faint);
+  }
+  nav.wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:76px;
+  }
+  .mark{display:flex; align-items:center; gap:10px; text-decoration:none;}
+  .halo{width:22px; height:22px;}
+  .wordmark{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:14px;
+    letter-spacing:.2em;
+    font-weight:500;
+    color:var(--ink);
+  }
+  .wordmark small{display:block; font-size:8.5px; letter-spacing:.24em; color:var(--slate); margin-top:2px;}
+  nav .btn{padding:11px 20px; font-size:11.5px;}
+
+  /* ===== HERO ===== */
+  .hero{
+    position:relative;
+    padding:150px 0 130px;
+    overflow:hidden;
+  }
+  .hero-halo{
+    position:absolute;
+    top:-420px; left:50%;
+    transform:translateX(-50%);
+    width:1100px; height:1100px;
+    pointer-events:none;
+  }
+  .hero-inner{
+    position:relative; z-index:2;
+    max-width:820px;
+  }
+  .hero h1{
+    font-size:clamp(2.6rem, 5.6vw, 4.7rem);
+    line-height:1.04;
+    margin:22px 0 26px;
+  }
+  .hero h1 em{
+    font-style:italic;
+    font-weight:440;
+    color:var(--gold);
+  }
+  .hero p.lede{
+    font-size:18px;
+    max-width:560px;
+    color:var(--ink-soft);
+    margin-bottom:38px;
+  }
+  .hero-cta{display:flex; align-items:center; gap:22px; flex-wrap:wrap;}
+  .hero-cta .fine{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px;
+    color:var(--slate);
+    letter-spacing:.03em;
+  }
+
+  /* ===== RULE ===== */
+  .rule{border:none; border-top:1px solid var(--gold-faint); margin:0;}
+  section{padding:96px 0;}
+  .section-head{max-width:640px; margin-bottom:56px;}
+  .section-head h2{font-size:clamp(1.8rem,3vw,2.5rem); margin-top:14px;}
+
+  /* ===== CASE STUDY ===== */
+  .case{background:var(--paper);}
+  .case-grid{
+    display:grid; grid-template-columns:1.1fr .9fr; gap:64px; align-items:start;
+  }
+  .case-copy p{color:var(--ink-soft); max-width:480px; margin-top:14px;}
+  .case-copy .clinic{
+    font-family:'Fraunces',serif; font-style:italic; font-weight:440;
+    font-size:22px; margin-top:22px; color:var(--ink);
+  }
+  .stats{display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--gold-faint); border:1px solid var(--gold-faint);}
+  .stat{background:var(--paper); padding:28px 22px;}
+  .stat .num{font-family:'Fraunces',serif; font-weight:340; font-size:2.4rem; color:var(--ink); line-height:1;}
+  .stat .lbl{font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--slate); margin-top:10px;}
+  .stat .lbl .todo{color:var(--gold);}
+
+  /* ===== MECHANISM ===== */
+  .mech-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:48px;}
+  .mech-item{border-top:1px solid var(--ink); padding-top:20px;}
+  .mech-item h3{font-size:1.3rem; margin-bottom:12px; font-weight:440;}
+  .mech-item p{color:var(--ink-soft); font-size:14.5px;}
+
+  /* ===== PATH ===== */
+  .path{background:var(--ink); color:var(--bone-soft);}
+  .path .section-head h2{color:var(--bone-soft);}
+  .path .eyebrow{color:var(--gold-soft);}
+  .path-list{display:flex; flex-direction:column;}
+  .path-row{
+    display:grid; grid-template-columns:70px 1fr 1.3fr; gap:32px;
+    padding:32px 0; border-top:1px solid rgba(231,227,218,.14);
+    align-items:baseline;
+  }
+  .path-row:last-child{border-bottom:1px solid rgba(231,227,218,.14);}
+  .path-num{font-family:'Fraunces',serif; font-style:italic; color:var(--gold-soft); font-size:1.4rem;}
+  .path-row h3{color:var(--bone-soft); font-size:1.3rem; font-weight:440;}
+  .path-row p{color:rgba(231,227,218,.68); font-size:14.5px; max-width:440px;}
+
+  /* ===== OFFER ===== */
+  .offer-grid{display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--gold-faint); border:1px solid var(--gold-faint); margin-bottom:40px;}
+  .offer-card{background:var(--paper); padding:36px 32px;}
+  .offer-card .eyebrow{display:block; margin-bottom:14px;}
+  .offer-card p{color:var(--ink-soft); font-size:14.5px;}
+  .guarantee{
+    border:1px solid var(--gold); padding:32px; background:var(--bone-soft);
+    max-width:720px;
+  }
+  .guarantee p{font-family:'Fraunces',serif; font-style:italic; font-size:1.2rem; line-height:1.5; color:var(--ink);}
+
+  /* ===== TIERS ===== */
+  .tiers{display:grid; grid-template-columns:repeat(3,1fr); gap:24px; align-items:stretch;}
+  .tier{
+    position:relative;
+    background:var(--paper);
+    border:1px solid var(--gold-faint);
+    padding:32px 28px;
+    display:flex; flex-direction:column;
+  }
+  .tier.featured{
+    border-color:var(--gold);
+    background:var(--bone-soft);
+  }
+  .tier-tag{
+    position:absolute; top:-13px; left:28px;
+    background:var(--gold); color:var(--paper);
+    font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.08em; text-transform:uppercase;
+    padding:5px 10px;
+  }
+  .tier .eyebrow{display:block; margin-top:6px;}
+  .tier-desc{color:var(--ink-soft); font-size:14px; margin:14px 0 20px; min-height:42px;}
+  .tier-price{display:flex; align-items:baseline; gap:8px; border-top:1px solid var(--gold-faint); padding-top:14px; margin-top:auto;}
+  .tier-price.sub{border-top:none; padding-top:2px; margin-top:0; margin-bottom:20px;}
+  .tier-price .amt{font-family:'Fraunces',serif; font-weight:340; font-size:1.5rem; color:var(--gold);}
+  .tier-price .per{font-family:'IBM Plex Mono',monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:.06em; color:var(--slate);}
+  .tier ul{list-style:none; display:flex; flex-direction:column; gap:10px;}
+  .tier li{font-size:13.5px; color:var(--ink-soft); padding-left:16px; position:relative;}
+  .tier li::before{content:"—"; position:absolute; left:0; color:var(--gold);}
+  .tier-fit{
+    font-family:'Fraunces',serif; font-style:italic; font-size:13.5px;
+    color:var(--gold); margin-top:20px; padding-top:16px; border-top:1px solid var(--gold-faint);
+  }
+  .tiers-note{
+    margin-top:36px; font-family:'IBM Plex Mono',monospace; font-size:12px;
+    color:var(--slate); letter-spacing:.02em; text-align:center;
+  }
+
+  /* ===== FORM ===== */
+  .apply{background:var(--ink); color:var(--bone-soft);}
+  .apply .section-head h2{color:var(--bone-soft);}
+  .apply .eyebrow{color:var(--gold-soft);}
+  .apply .section-head p{color:rgba(231,227,218,.68); margin-top:14px;}
+  form{max-width:640px; display:flex; flex-direction:column; gap:22px;}
+  .field{display:flex; flex-direction:column; gap:8px;}
+  .field label{
+    font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--gold-soft);
+  }
+  .field input, .field select, .field textarea{
+    background:transparent; border:none; border-bottom:1px solid rgba(231,227,218,.3);
+    color:var(--bone-soft); font-family:'Inter',sans-serif; font-size:15px; padding:10px 2px;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus{
+    outline:none; border-bottom-color:var(--gold-soft);
+  }
+  .field select option{color:#111; background:#fff;}
+  .field textarea{resize:vertical; min-height:70px;}
+  .apply .btn{align-self:flex-start; margin-top:8px; background:var(--gold); border-color:var(--gold); color:var(--ink);}
+  .apply .btn:hover{background:transparent; color:var(--bone-soft); border-color:var(--gold-soft);}
+
+  /* ===== FOOTER ===== */
+  footer{padding:56px 0 64px; border-top:1px solid var(--gold-faint);}
+  .foot-row{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:20px;}
+  .foot-row .fine{font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--slate); letter-spacing:.04em;}
+
+  /* ===== REVEAL ===== */
+  .reveal{opacity:0; transform:translateY(16px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  @media (max-width:860px){
+    .case-grid, .mech-grid, .offer-grid, .tiers{grid-template-columns:1fr;}
+    .path-row{grid-template-columns:1fr; gap:8px;}
+    section{padding:72px 0;}
+    .hero{padding:120px 0 90px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <a href="#" class="mark">
+      <svg class="halo" viewBox="0 0 40 40" fill="none">
+        <path d="M20 3 A17 17 0 1 1 19.9 3" stroke="#a47c3b" stroke-width="1.4"/>
+      </svg>
+      <span class="wordmark">SAINT GROWTH<small>PARTNERS FOR CLINICS</small></span>
+    </a>
+    <a href="#apply" class="btn">Aplicar</a>
+  </nav>
+</header>
+
+<main>
+  <section class="hero">
+    <svg class="hero-halo" viewBox="0 0 1100 1100" fill="none">
+      <circle cx="550" cy="550" r="480" stroke="#a47c3b" stroke-opacity=".28" stroke-width="1"/>
+      <circle cx="550" cy="550" r="430" stroke="#a47c3b" stroke-opacity=".14" stroke-width="1"/>
+    </svg>
+    <div class="wrap hero-inner">
+      <span class="eyebrow">Growth Partners — Clínicas dentales y médicas</span>
+      <h1>La demanda no debería ser <em>accidental</em>.</h1>
+      <p class="lede">Diseñamos el sistema de adquisición de pacientes para clínicas que ya son excelentes en lo suyo y necesitan que se note: tráfico de precisión, infraestructura de conversión y reportes que no dejan dudas.</p>
+      <div class="hero-cta">
+        <a href="#apply" class="btn">Ver si mi clínica califica</a>
+        <span class="fine">Trabajamos con un número limitado de clínicas por trimestre</span>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <section class="case reveal">
+    <div class="wrap">
+      <div class="case-grid">
+        <div class="case-copy">
+          <span class="eyebrow">Caso de estudio</span>
+          <h2>De boca en boca a agenda completa.</h2>
+          <p class="clinic">Clínica Odontológica Villarroel</p>
+          <p>Dependían casi por completo de referidos, con espacios vacíos en la agenda semana a semana. Implementamos nuestro sistema de adquisición híbrido — segmentación de Meta Ads por especialidad, funnel de conversión propio y seguimiento automatizado de cada lead.</p>
+          <p>El resultado: la agenda se llenó de pacientes nuevos gestionados enteramente por el sistema, sin depender del boca en boca.</p>
+        </div>
+        <div class="stats">
+          <div class="stat">
+            <div class="num">65</div>
+            <div class="lbl">Pacientes nuevos<br>en una semana</div>
+          </div>
+          <div class="stat">
+            <div class="num">14 <span style="font-size:1.1rem;">días</span></div>
+            <div class="lbl">De implementación<br>a resultados</div>
+          </div>
+          <div class="stat">
+            <div class="num">—</div>
+            <div class="lbl"><span class="todo">Completar</span><br>Costo por paciente (CAC)</div>
+          </div>
+          <div class="stat">
+            <div class="num">—</div>
+            <div class="lbl"><span class="todo">Completar</span><br>Inversión en medios</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <section class="reveal">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">El sistema</span>
+        <h2>Tres partes, un solo resultado: pacientes sentados en su sala de espera.</h2>
+      </div>
+      <div class="mech-grid">
+        <div class="mech-item">
+          <h3>Tráfico quirúrgico</h3>
+          <p>Campañas de Meta Ads segmentadas por especialidad y momento de intención de compra. No disparamos a ciegas: cada creativo está diseñado para el paciente que ya está buscando su tratamiento.</p>
+        </div>
+        <div class="mech-item">
+          <h3>Infraestructura de conversión</h3>
+          <p>Un lead frío no sirve. Construimos la landing, el seguimiento automatizado y el flujo de respuesta para que cada contacto se convierta en un turno agendado antes de que cierre la pestaña.</p>
+        </div>
+        <div class="mech-item">
+          <h3>Reporting sin humo</h3>
+          <p>Nada de alcance ni impresiones como métrica de éxito. Medimos costo por paciente agendado, y eso es lo único que reportamos quincenalmente.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="path reveal">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Cómo empezamos a trabajar</span>
+        <h2>Tres etapas, sin atajos.</h2>
+      </div>
+      <div class="path-list">
+        <div class="path-row">
+          <span class="path-num">I</span>
+          <h3>Diagnóstico</h3>
+          <p>Auditamos su presencia actual — ads, web, flujo de agenda — y definimos un objetivo concreto de pacientes nuevos.</p>
+        </div>
+        <div class="path-row">
+          <span class="path-num">II</span>
+          <h3>Implementación</h3>
+          <p>Montamos la campaña y la infraestructura de conversión. El setup fee cubre esta etapa por completo.</p>
+        </div>
+        <div class="path-row">
+          <span class="path-num">III</span>
+          <h3>Escala</h3>
+          <p>Optimización continua con fee mensual y reporting quincenal — sin sorpresas, sin promesas vacías.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Cómo trabajamos</span>
+        <h2>Un modelo simple, sin honorarios inflados.</h2>
+      </div>
+      <div class="offer-grid">
+        <div class="offer-card">
+          <span class="eyebrow">Setup fee</span>
+          <p>Pago único que cubre la integración técnica: cuenta de ads, pixel, landing y flujo de automatización. Sin esto no arrancamos nada a medias.</p>
+        </div>
+        <div class="offer-card">
+          <span class="eyebrow">Fee mensual</span>
+          <p>Gestión continua de campañas e infraestructura. Fijo, predecible, y sujeto a revisión con cada reporte quincenal.</p>
+        </div>
+      </div>
+      <div class="guarantee">
+        <p>"Si no generamos los pacientes calificados acordados en los primeros 30 días, seguimos gestionando su cuenta sin costo adicional ese mes."</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <section class="reveal">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Paquetes</span>
+        <h2>Tres niveles de acompañamiento, un mismo sistema.</h2>
+      </div>
+      <div class="tiers">
+        <div class="tier">
+          <span class="eyebrow">Starter</span>
+          <p class="tier-desc">Para la clínica que nunca corrió una campaña en serio y necesita el primer sistema real de captación, bien hecho desde el día uno.</p>
+          <div class="tier-price"><span class="amt">[Definir]</span><span class="per">setup</span></div>
+          <div class="tier-price sub"><span class="amt">[Definir]</span><span class="per">/mes</span></div>
+          <ul>
+            <li>1 campaña de Meta Ads activa, segmentada por tratamiento</li>
+            <li>Landing de conversión propia (no genérica)</li>
+            <li>Pixel y seguimiento de conversiones instalado</li>
+            <li>Reporting mensual con costo por paciente agendado</li>
+          </ul>
+          <p class="tier-fit">Ideal si hoy dependen casi por completo del boca en boca.</p>
+        </div>
+        <div class="tier featured">
+          <span class="tier-tag">Más elegido</span>
+          <span class="eyebrow">Growth</span>
+          <p class="tier-desc">El sistema completo: tráfico constante, conversión optimizada y ningún lead se enfría esperando respuesta. Nuestro nivel de trabajo estándar.</p>
+          <div class="tier-price"><span class="amt">[Definir]</span><span class="per">setup</span></div>
+          <div class="tier-price sub"><span class="amt">[Definir]</span><span class="per">/mes</span></div>
+          <ul>
+            <li>Todo lo de Starter</li>
+            <li>2-3 campañas activas en simultáneo, testeadas y optimizadas</li>
+            <li>Automatización de respuesta a leads (WhatsApp/CRM)</li>
+            <li>Optimización continua de segmentación y creativos</li>
+            <li>Reporting quincenal con revisión de estrategia</li>
+          </ul>
+          <p class="tier-fit">Ideal si ya tienen algo de flujo de pacientes y quieren volverlo predecible.</p>
+        </div>
+        <div class="tier">
+          <span class="eyebrow">Elite</span>
+          <p class="tier-desc">Para la clínica que ya lidera su zona y quiere consolidar esa posición: más canales, más datos, decisiones al detalle.</p>
+          <div class="tier-price"><span class="amt">[Definir]</span><span class="per">setup</span></div>
+          <div class="tier-price sub"><span class="amt">[Definir]</span><span class="per">/mes</span></div>
+          <ul>
+            <li>Todo lo de Growth</li>
+            <li>Gestión de reputación y reseñas online</li>
+            <li>Dashboard de reporting a medida, en tiempo real</li>
+            <li>Reporting semanal + sesión estratégica mensual</li>
+            <li>Soporte prioritario y canal directo con el equipo</li>
+          </ul>
+          <p class="tier-fit">Ideal si buscan dominar su categoría, no solo llenar la agenda.</p>
+        </div>
+      </div>
+      <p class="tiers-note">No vendemos paquetes cerrados: vendemos etapas de crecimiento. Empezamos donde su clínica está hoy.</p>
+    </div>
+  </section>
+
+  <section class="apply reveal" id="apply">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Aplicación</span>
+        <h2>¿Su clínica califica?</h2>
+        <p>Trabajamos con un número limitado de clínicas por trimestre para garantizar resultados. Complete la aplicación y coordinamos una sesión estratégica sin costo.</p>
+      </div>
+      <form onsubmit="event.preventDefault(); this.querySelector('.btn').textContent='Aplicación enviada';">
+        <div class="field">
+          <label for="nombre">Nombre completo y cargo</label>
+          <input id="nombre" type="text" placeholder="Ej. Dra. Fernández — Directora Médica" required>
+        </div>
+        <div class="field">
+          <label for="clinica">Clínica y sitio web / Instagram</label>
+          <input id="clinica" type="text" placeholder="Ej. Clínica Villarroel — @clinicavillarroel" required>
+        </div>
+        <div class="field">
+          <label for="volumen">Volumen actual de pacientes nuevos por mes</label>
+          <select id="volumen" required>
+            <option value="">Seleccionar</option>
+            <option>0–10</option>
+            <option>10–30</option>
+            <option>30–50+</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="capacidad">¿Tienen capacidad para absorber +30 pacientes nuevos este mes?</label>
+          <select id="capacidad" required>
+            <option value="">Seleccionar</option>
+            <option>Sí</option>
+            <option>No</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="obstaculo">¿Cuál es su mayor obstáculo para crecer hoy?</label>
+          <textarea id="obstaculo" placeholder="Cuéntenos en pocas líneas"></textarea>
+        </div>
+        <button class="btn" type="submit">Enviar aplicación</button>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot-row">
+    <div class="mark">
+      <svg class="halo" viewBox="0 0 40 40" fill="none">
+        <path d="M20 3 A17 17 0 1 1 19.9 3" stroke="#a47c3b" stroke-width="1.4"/>
+      </svg>
+      <span class="wordmark">SAINT GROWTH</span>
+    </div>
+    <span class="fine">Growth Partners para clínicas dentales y médicas</span>
+  </div>
+</footer>
+
+<script>
+  const els = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); } });
+  }, {threshold:.12});
+  els.forEach(el=>obs.observe(el));
+</script>
+
+</body>
+</html>
