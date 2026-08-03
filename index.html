@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SAINT GROWTH — Growth Partners para Clínicas</title>
-<meta name="description" content="Diseñamos el sistema de adquisición de pacientes para clínicas dentales y médicas: tráfico de precisión, infraestructura de conversión y reporting sin humo.">
+<title>LIGHT PARTNERS — Growth Partners para Clínicas</title>
+<meta name="description" content="Diseñamos el sistema de adquisición de pacientes para clínicas dentales y médicas: tráfico de precisión, infraestructura de conversión y reportes que no dejan dudas.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,340;9..144,440;9..144,560&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -140,6 +140,11 @@
   .section-head{max-width:640px; margin-bottom:56px;}
   .section-head h2{font-size:clamp(1.8rem,3vw,2.5rem); margin-top:14px;}
 
+  /* ===== WHY ===== */
+  .why-inner{text-align:center; max-width:680px; margin:0 auto;}
+  .why-line{font-family:'Fraunces',serif; font-size:1.4rem; color:var(--ink-soft); margin-top:16px; line-height:1.4;}
+  .why-line.strong{color:var(--ink); font-style:italic; font-weight:440;}
+
   /* ===== CASE STUDY ===== */
   .case{background:var(--paper);}
   .case-grid{
@@ -161,6 +166,20 @@
   .mech-item{border-top:1px solid var(--ink); padding-top:20px;}
   .mech-item h3{font-size:1.3rem; margin-bottom:12px; font-weight:440;}
   .mech-item p{color:var(--ink-soft); font-size:14.5px;}
+
+  /* ===== DIAGRAM ===== */
+  .diagram{
+    display:flex; align-items:center; justify-content:center; flex-wrap:wrap;
+    gap:14px; margin-top:56px; padding:36px 0;
+  }
+  .dstep{
+    font-family:'IBM Plex Mono',monospace; font-size:12.5px; letter-spacing:.05em; text-transform:uppercase;
+    border:1px solid var(--gold-faint); background:var(--paper);
+    padding:14px 20px;
+  }
+  .dstep.featured{border-color:var(--gold); background:var(--bone-soft); color:var(--gold);}
+  .darrow{color:var(--gold); font-size:16px;}
+  .diagram-caption{text-align:center; font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--slate);}
 
   /* ===== PATH ===== */
   .path{background:var(--ink); color:var(--bone-soft);}
@@ -258,6 +277,8 @@
 
   @media (max-width:860px){
     .case-grid, .mech-grid, .offer-grid, .tiers{grid-template-columns:1fr;}
+    .diagram{flex-direction:column;}
+    .darrow{transform:rotate(90deg);}
     .path-row{grid-template-columns:1fr; gap:8px;}
     section{padding:72px 0;}
     .hero{padding:120px 0 90px;}
@@ -272,9 +293,9 @@
       <svg class="halo" viewBox="0 0 40 40" fill="none">
         <path d="M20 3 A17 17 0 1 1 19.9 3" stroke="#a47c3b" stroke-width="1.4"/>
       </svg>
-      <span class="wordmark">SAINT GROWTH<small>PARTNERS FOR CLINICS</small></span>
+      <span class="wordmark">LIGHT PARTNERS<small>GROWTH PARTNERS</small></span>
     </a>
-    <a href="#apply" class="btn">Aplicar</a>
+    <a href="#apply" class="btn">Solicitar Growth Audit</a>
   </nav>
 </header>
 
@@ -289,9 +310,19 @@
       <h1>La demanda no debería ser <em>accidental</em>.</h1>
       <p class="lede">Diseñamos el sistema de adquisición de pacientes para clínicas que ya son excelentes en lo suyo y necesitan que se note: tráfico de precisión, infraestructura de conversión y reportes que no dejan dudas.</p>
       <div class="hero-cta">
-        <a href="#apply" class="btn">Ver si mi clínica califica</a>
-        <span class="fine">Trabajamos con un número limitado de clínicas por trimestre</span>
+        <a href="#apply" class="btn">Solicitar Growth Audit</a>
+        <span class="fine">Trabajamos con un máximo de 4 clínicas por trimestre</span>
       </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <section class="why reveal">
+    <div class="wrap why-inner">
+      <span class="eyebrow">Why Light Partners</span>
+      <p class="why-line">No somos una agencia. No vendemos campañas sueltas ni diseño por encargo.</p>
+      <p class="why-line strong">Construimos el sistema completo que convierte demanda en pacientes.</p>
     </div>
   </section>
 
@@ -351,6 +382,19 @@
           <p>Nada de alcance ni impresiones como métrica de éxito. Medimos costo por paciente agendado, y eso es lo único que reportamos quincenalmente.</p>
         </div>
       </div>
+
+      <div class="diagram">
+        <div class="dstep"><span>Meta Ads</span></div>
+        <div class="darrow">→</div>
+        <div class="dstep"><span>Landing</span></div>
+        <div class="darrow">→</div>
+        <div class="dstep"><span>WhatsApp</span></div>
+        <div class="darrow">→</div>
+        <div class="dstep"><span>Agenda</span></div>
+        <div class="darrow">→</div>
+        <div class="dstep featured"><span>Paciente</span></div>
+      </div>
+      <p class="diagram-caption">Un solo flujo, sin fricción entre el clic y el turno agendado.</p>
     </div>
   </section>
 
@@ -397,7 +441,7 @@
         </div>
       </div>
       <div class="guarantee">
-        <p>"Si no generamos los pacientes calificados acordados en los primeros 30 días, seguimos gestionando su cuenta sin costo adicional ese mes."</p>
+        <p>"Antes de comenzar, definimos juntos un objetivo concreto de leads calificados. Si no lo alcanzamos en los primeros 30 días, seguimos gestionando la cuenta sin honorarios adicionales ese mes. La inversión publicitaria sigue siendo propiedad del cliente en todo momento."</p>
       </div>
     </div>
   </section>
@@ -461,41 +505,24 @@
   <section class="apply reveal" id="apply">
     <div class="wrap">
       <div class="section-head">
-        <span class="eyebrow">Aplicación</span>
-        <h2>¿Su clínica califica?</h2>
-        <p>Trabajamos con un número limitado de clínicas por trimestre para garantizar resultados. Complete la aplicación y coordinamos una sesión estratégica sin costo.</p>
+        <span class="eyebrow">Growth Audit</span>
+        <h2>Solicitá tu Growth Audit gratuito.</h2>
+        <p>En 20 minutos revisamos su presencia digital, tracking, funnel y reputación online, y le entregamos un diagnóstico concreto de dónde está perdiendo pacientes hoy. Sin compromiso, sin venta forzada.</p>
       </div>
-      <form onsubmit="event.preventDefault(); this.querySelector('.btn').textContent='Aplicación enviada';">
+      <form onsubmit="event.preventDefault(); this.querySelector('.btn').textContent='Auditoría solicitada';">
         <div class="field">
-          <label for="nombre">Nombre completo y cargo</label>
-          <input id="nombre" type="text" placeholder="Ej. Dra. Fernández — Directora Médica" required>
+          <label for="nombre">Nombre completo</label>
+          <input id="nombre" type="text" placeholder="Ej. Dra. Fernández" required>
         </div>
         <div class="field">
-          <label for="clinica">Clínica y sitio web / Instagram</label>
-          <input id="clinica" type="text" placeholder="Ej. Clínica Villarroel — @clinicavillarroel" required>
+          <label for="whatsapp">WhatsApp</label>
+          <input id="whatsapp" type="tel" placeholder="Ej. +54 9 11 xxxx xxxx" required>
         </div>
         <div class="field">
-          <label for="volumen">Volumen actual de pacientes nuevos por mes</label>
-          <select id="volumen" required>
-            <option value="">Seleccionar</option>
-            <option>0–10</option>
-            <option>10–30</option>
-            <option>30–50+</option>
-          </select>
+          <label for="clinica">Instagram o sitio web de la clínica</label>
+          <input id="clinica" type="text" placeholder="Ej. @clinicavillarroel" required>
         </div>
-        <div class="field">
-          <label for="capacidad">¿Tienen capacidad para absorber +30 pacientes nuevos este mes?</label>
-          <select id="capacidad" required>
-            <option value="">Seleccionar</option>
-            <option>Sí</option>
-            <option>No</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="obstaculo">¿Cuál es su mayor obstáculo para crecer hoy?</label>
-          <textarea id="obstaculo" placeholder="Cuéntenos en pocas líneas"></textarea>
-        </div>
-        <button class="btn" type="submit">Enviar aplicación</button>
+        <button class="btn" type="submit">Solicitar Growth Audit</button>
       </form>
     </div>
   </section>
@@ -507,7 +534,7 @@
       <svg class="halo" viewBox="0 0 40 40" fill="none">
         <path d="M20 3 A17 17 0 1 1 19.9 3" stroke="#a47c3b" stroke-width="1.4"/>
       </svg>
-      <span class="wordmark">SAINT GROWTH</span>
+      <span class="wordmark">LIGHT PARTNERS</span>
     </div>
     <span class="fine">Growth Partners para clínicas dentales y médicas</span>
   </div>
