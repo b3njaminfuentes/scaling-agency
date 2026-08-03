@@ -33,6 +33,8 @@ La carpeta `docs/` contiene el sistema completo de notas interconectadas listo p
 
 ---
 
-## 👥 Equipo Fundador
+## 👥 Equipo Fundador & Comunidad
 - **Benjamín Fuentes:** Head of Technology & Conversion Systems.
 - **Hermano Fuentes:** Head of Media Buying & Client Operations.
+- 💬 **Discord Oficial:** [Unirse al servidor de Discord](https://discord.gg/GWeSmF49m)
+

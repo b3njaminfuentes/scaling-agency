@@ -124,3 +124,11 @@ $$CAC = \frac{\text{Gasto Total en Ads}}{\text{Pacientes Nuevos Agendados}}$$
 $$CPL = \frac{\text{Gasto Total en Ads}}{\text{Leads Calificados Recibidos}}$$
 
 $$CR_{Landing} = \left( \frac{\text{Formularios Enviados}}{\text{Visitas Únicas}} \right) \times 100$$
+
+---
+
+## 7. 💬 Canales & Comunicación
+- 🎮 **Discord Oficial:** [light partners Discord](https://discord.gg/GWeSmF49m)
+- 🌐 **Web en Producción:** [saint-growth.vercel.app](https://saint-growth.vercel.app)
+- 🐙 **Repo GitHub:** [github.com/b3njaminfuentes/scaling-agency](https://github.com/b3njaminfuentes/scaling-agency)
+
