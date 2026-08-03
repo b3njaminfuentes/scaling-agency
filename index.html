@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>LIGHT PARTNERS — Growth Partners para Clínicas</title>
 <meta name="description" content="Diseñamos el sistema de adquisición de pacientes para clínicas dentales y médicas: tráfico de precisión, infraestructura de conversión y reportes que no dejan dudas.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg?v=2">
@@ -271,7 +271,10 @@
   .mech-item:hover h3{color:var(--gold);}
   .mech-item p{color:var(--ink-soft); font-size:14.5px;}
 
-  /* ===== DIAGRAM ===== */
+  /* ===== DIAGRAM & MOBILE FLOW ===== */
+  .mobile-only{display:none !important;}
+  .desktop-only{display:block;}
+
   .diagram-wrap{
     width:100%;
     margin:48px 0 20px;
@@ -302,6 +305,75 @@
     opacity:0; transition:opacity .5s ease .2s;
   }
   .diagram-caption.in{opacity:1;}
+
+  /* Mobile Flow */
+  .mobile-flow{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    align-items:center;
+    margin:32px auto 16px;
+    width:100%;
+    max-width:390px;
+  }
+  .mflow-step{
+    width:100%;
+    background:var(--paper);
+    border:1px solid rgba(164,124,59,.25);
+    border-radius:6px;
+    padding:14px 18px;
+    display:flex;
+    align-items:center;
+    gap:14px;
+    box-shadow:0 3px 12px rgba(18,21,28,.04);
+    opacity:0;
+    transform:translateY(16px);
+    transition:opacity .5s ease, transform .5s ease, border-color .3s ease;
+  }
+  .mflow-step.in{opacity:1; transform:translateY(0);}
+  .mflow-step.featured{
+    background:var(--bone-soft);
+    border:1.5px solid var(--gold);
+    box-shadow:0 6px 20px rgba(164,124,59,.12);
+  }
+  .mflow-num{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    font-weight:600;
+    color:var(--gold);
+    background:rgba(164,124,59,.1);
+    padding:5px 8px;
+    border-radius:4px;
+    flex-shrink:0;
+  }
+  .mflow-body{
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+  }
+  .mflow-body strong{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    letter-spacing:.08em;
+    color:var(--ink);
+  }
+  .mflow-step.featured .mflow-body strong{
+    color:var(--gold);
+  }
+  .mflow-body span{
+    font-size:12px;
+    color:var(--ink-soft);
+    line-height:1.35;
+  }
+  .mflow-arrow{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    height:20px;
+    opacity:0;
+    transition:opacity .4s ease;
+  }
+  .mflow-arrow.in{opacity:1;}
 
   /* ===== PATH ===== */
   .path{background:var(--ink); color:var(--bone-soft);}
@@ -503,10 +575,83 @@
   }
 
   @media (max-width:860px){
-    .case-grid, .mech-grid, .offer-grid, .tiers{grid-template-columns:1fr;}
-    .path-row{grid-template-columns:1fr; gap:8px;}
-    section{padding:72px 0;}
-    .hero{padding:120px 0 90px;}
+    .desktop-only{display:none !important;}
+    .mobile-only{display:flex !important;}
+
+    /* Spacing & Layout */
+    .wrap{padding:0 20px;}
+    section{padding:56px 0;}
+
+    /* Navigation */
+    nav.wrap{height:66px;}
+    .wordmark-fraunces{font-size:18.5px;}
+    nav .btn{padding:9px 13px; font-size:10.5px;}
+
+    /* Hero */
+    .hero{padding:92px 0 54px;}
+    .hero-halo{width:640px; height:640px; top:-260px;}
+    .hero h1{font-size:clamp(2rem, 8.5vw, 2.75rem); line-height:1.1; margin:16px 0 18px;}
+    .hero p.lede{font-size:15.5px; line-height:1.55; margin-bottom:26px;}
+    .hero-cta{flex-direction:column; align-items:stretch; gap:12px;}
+    .hero-cta .btn{width:100%; justify-content:center; padding:15px 20px; font-size:12.5px; text-align:center;}
+    .hero-cta .fine{text-align:center; font-size:11px;}
+
+    /* Why */
+    .why-line{font-size:1.25rem;}
+
+    /* Case Study */
+    .case-grid{grid-template-columns:1fr; gap:32px;}
+    .stats{grid-template-columns:1fr 1fr;}
+    .stat{padding:20px 16px;}
+    .stat .num{font-size:1.85rem;}
+    .stat .lbl{font-size:9.5px;}
+
+    /* Mechanism */
+    .mech-grid{grid-template-columns:1fr; gap:26px;}
+
+    /* Path */
+    .path-row{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      padding:22px 0;
+    }
+    .path-num{font-size:1.2rem;}
+    .path-row h3{font-size:1.2rem;}
+    .path-row p{font-size:14px; max-width:100%;}
+
+    /* Offer & Guarantee */
+    .offer-grid{grid-template-columns:1fr; margin-bottom:24px;}
+    .offer-card{padding:24px 20px;}
+    .guarantee{padding:24px 20px;}
+    .guarantee p{font-size:1.05rem;}
+
+    /* Tiers */
+    .tiers{grid-template-columns:1fr; gap:24px;}
+    .tier{padding:28px 22px;}
+    .tier-tag{left:20px; font-size:9.5px;}
+    .tier-price .amt{font-size:1.4rem;}
+    .tier ul{gap:8px;}
+    .tier li{font-size:13px;}
+
+    /* Form */
+    form{width:100%;}
+    .field input, .field select, .field textarea{
+      font-size:16px; /* Prevents auto-zoom in iOS Safari */
+      padding:12px 2px;
+    }
+    .apply .btn{
+      width:100%;
+      justify-content:center;
+      padding:15px 20px;
+      font-size:13px;
+    }
+
+    /* Footer */
+    footer{padding:40px 0 max(36px, env(safe-area-inset-bottom));}
+    .foot-row{flex-direction:column; align-items:flex-start; gap:14px;}
+
+    /* Watermarks */
     .watermark-hero, .watermark-why, .watermark-path, .watermark-apply{display:none;}
   }
 </style>
@@ -615,7 +760,8 @@
         </div>
       </div>
 
-      <div class="diagram-wrap">
+      <!-- Desktop Diagram -->
+      <div class="diagram-wrap desktop-only">
         <svg class="diagram-svg" viewBox="0 0 960 76" fill="none" xmlns="http://www.w3.org/2000/svg">
           <!-- Box 1: Meta Ads -->
           <g class="dbox" style="animation-delay:.1s">
@@ -672,6 +818,70 @@
           </g>
         </svg>
       </div>
+
+      <!-- Mobile Flow (Pill cards for iPhone & Mobile) -->
+      <div class="mobile-flow mobile-only">
+        <div class="mflow-step">
+          <div class="mflow-num">01</div>
+          <div class="mflow-body">
+            <strong>META ADS</strong>
+            <span>Tráfico quirúrgico segmentado</span>
+          </div>
+        </div>
+        <div class="mflow-arrow">
+          <svg width="16" height="20" viewBox="0 0 16 20" fill="none">
+            <line x1="8" y1="0" x2="8" y2="15" stroke="#a47c3b" stroke-width="1.5"/>
+            <polygon points="4,12 8,18 12,12" fill="#a47c3b"/>
+          </svg>
+        </div>
+        <div class="mflow-step">
+          <div class="mflow-num">02</div>
+          <div class="mflow-body">
+            <strong>LANDING</strong>
+            <span>Conversión propia optimizada</span>
+          </div>
+        </div>
+        <div class="mflow-arrow">
+          <svg width="16" height="20" viewBox="0 0 16 20" fill="none">
+            <line x1="8" y1="0" x2="8" y2="15" stroke="#a47c3b" stroke-width="1.5"/>
+            <polygon points="4,12 8,18 12,12" fill="#a47c3b"/>
+          </svg>
+        </div>
+        <div class="mflow-step">
+          <div class="mflow-num">03</div>
+          <div class="mflow-body">
+            <strong>WHATSAPP</strong>
+            <span>Respuesta automatizada inmediata</span>
+          </div>
+        </div>
+        <div class="mflow-arrow">
+          <svg width="16" height="20" viewBox="0 0 16 20" fill="none">
+            <line x1="8" y1="0" x2="8" y2="15" stroke="#a47c3b" stroke-width="1.5"/>
+            <polygon points="4,12 8,18 12,12" fill="#a47c3b"/>
+          </svg>
+        </div>
+        <div class="mflow-step">
+          <div class="mflow-num">04</div>
+          <div class="mflow-body">
+            <strong>AGENDA</strong>
+            <span>Turno coordinado y confirmado</span>
+          </div>
+        </div>
+        <div class="mflow-arrow">
+          <svg width="16" height="20" viewBox="0 0 16 20" fill="none">
+            <line x1="8" y1="0" x2="8" y2="15" stroke="#a47c3b" stroke-width="1.5"/>
+            <polygon points="4,12 8,18 12,12" fill="#a47c3b"/>
+          </svg>
+        </div>
+        <div class="mflow-step featured">
+          <div class="mflow-num">05</div>
+          <div class="mflow-body">
+            <strong>PACIENTE</strong>
+            <span>Sentado en su sala de espera</span>
+          </div>
+        </div>
+      </div>
+
       <p class="diagram-caption">Un solo flujo, sin fricción entre el clic y el turno agendado.</p>
     </div>
   </section>
@@ -881,7 +1091,8 @@
   const diagObs = new IntersectionObserver((entries)=>{
     entries.forEach(e=>{
       if(e.isIntersecting){
-        e.target.querySelector('.diagram-svg').classList.add('animated');
+        const svg = e.target.querySelector('.diagram-svg');
+        if(svg) svg.classList.add('animated');
         const cap = e.target.parentElement.querySelector('.diagram-caption');
         if(cap) setTimeout(()=>cap.classList.add('in'), 2200);
         diagObs.unobserve(e.target);
@@ -889,6 +1100,22 @@
     });
   }, {threshold:.3});
   document.querySelectorAll('.diagram-wrap').forEach(el=>diagObs.observe(el));
+
+  /* === Mobile flow step animation === */
+  const mflowObs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        const items = e.target.querySelectorAll('.mflow-step, .mflow-arrow');
+        items.forEach((it, i)=>{
+          setTimeout(()=>it.classList.add('in'), i * 120);
+        });
+        const cap = e.target.parentElement.querySelector('.diagram-caption');
+        if(cap) setTimeout(()=>cap.classList.add('in'), 1200);
+        mflowObs.unobserve(e.target);
+      }
+    });
+  }, {threshold:.1});
+  document.querySelectorAll('.mobile-flow').forEach(el=>mflowObs.observe(el));
 
   /* === Path rows staggered slide-in === */
   const pathObs = new IntersectionObserver((entries)=>{
