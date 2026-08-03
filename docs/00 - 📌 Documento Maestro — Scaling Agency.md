@@ -129,6 +129,7 @@ $$CR_{Landing} = \left( \frac{\text{Formularios Enviados}}{\text{Visitas Únicas
 
 ## 7. 💬 Canales & Comunicación
 - 🎮 **Discord Oficial:** [light partners Discord](https://discord.gg/GWeSmF49m)
-- 🌐 **Web en Producción:** [saint-growth.vercel.app](https://saint-growth.vercel.app)
+- 🌐 **Web en Producción:** [light-partners.vercel.app](https://light-partners.vercel.app)
 - 🐙 **Repo GitHub:** [github.com/b3njaminfuentes/scaling-agency](https://github.com/b3njaminfuentes/scaling-agency)
+
 
