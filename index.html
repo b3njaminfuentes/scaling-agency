@@ -5,12 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LIGHT PARTNERS — Growth Partners para Clínicas</title>
 <meta name="description" content="Diseñamos el sistema de adquisición de pacientes para clínicas dentales y médicas: tráfico de precisión, infraestructura de conversión y reportes que no dejan dudas.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-<link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <meta property="og:title" content="LIGHT PARTNERS — Growth Partners para Clínicas">
 <meta property="og:description" content="El sistema completo de adquisición de pacientes para clínicas odontológicas y médicas.">
-<meta property="og:image" content="https://light-partners.vercel.app/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,340;9..144,440;9..144,560&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -178,18 +177,22 @@
   .mech-item p{color:var(--ink-soft); font-size:14.5px;}
 
   /* ===== DIAGRAM ===== */
-  .diagram{
-    display:flex; align-items:center; justify-content:center; flex-wrap:wrap;
-    gap:14px; margin-top:56px; padding:36px 0;
+  .diagram-wrap{
+    width:100%;
+    margin:48px 0 20px;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    padding:12px 0;
   }
-  .dstep{
-    font-family:'IBM Plex Mono',monospace; font-size:12.5px; letter-spacing:.05em; text-transform:uppercase;
-    border:1px solid var(--gold-faint); background:var(--paper);
-    padding:14px 20px;
+  .diagram-svg{
+    width:100%;
+    max-width:960px;
+    min-width:680px;
+    height:auto;
+    display:block;
+    margin:0 auto;
   }
-  .dstep.featured{border-color:var(--gold); background:var(--bone-soft); color:var(--gold);}
-  .darrow{color:var(--gold); font-size:16px;}
-  .diagram-caption{text-align:center; font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--slate);}
+  .diagram-caption{text-align:center; font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--slate); margin-top:12px;}
 
   /* ===== PATH ===== */
   .path{background:var(--ink); color:var(--bone-soft);}
@@ -287,8 +290,6 @@
 
   @media (max-width:860px){
     .case-grid, .mech-grid, .offer-grid, .tiers{grid-template-columns:1fr;}
-    .diagram{flex-direction:column;}
-    .darrow{transform:rotate(90deg);}
     .path-row{grid-template-columns:1fr; gap:8px;}
     section{padding:72px 0;}
     .hero{padding:120px 0 90px;}
@@ -300,7 +301,11 @@
 <header>
   <nav class="wrap">
     <a href="#" class="mark">
-      <img src="assets/logo.png" alt="LIGHT PARTNERS" class="logo-mark">
+      <svg width="40" height="40" viewBox="0 0 48 48">
+        <circle cx="24" cy="24" r="18" fill="none" stroke="#a67c3d" stroke-width="2"/>
+        <text x="24" y="30" text-anchor="middle" font-size="16" font-weight="500" 
+          fill="#a67c3d" font-family="Georgia, serif">L</text>
+      </svg>
       <span class="wordmark">LIGHT PARTNERS<small>GROWTH PARTNERS</small></span>
     </a>
     <a href="#apply" class="btn">Solicitar Growth Audit</a>
@@ -314,7 +319,7 @@
       <circle cx="550" cy="550" r="430" stroke="#a47c3b" stroke-opacity=".14" stroke-width="1"/>
     </svg>
     <div class="wrap hero-inner">
-      <span class="eyebrow"><img src="assets/logo-gold.png" alt="" style="height:15px; width:auto; vertical-align:middle; margin-right:4px;">Growth Partners — Clínicas dentales y médicas</span>
+      <span class="eyebrow">Growth Partners — Clínicas dentales y médicas</span>
       <h1>La demanda no debería ser <em>accidental</em>.</h1>
       <p class="lede">Diseñamos el sistema de adquisición de pacientes para clínicas que ya son excelentes en lo suyo y necesitan que se note: tráfico de precisión, infraestructura de conversión y reportes que no dejan dudas.</p>
       <div class="hero-cta">
@@ -356,12 +361,12 @@
             <div class="lbl">De implementación<br>a resultados</div>
           </div>
           <div class="stat">
-            <div class="num">—</div>
-            <div class="lbl"><span class="todo">Completar</span><br>Costo por paciente (CAC)</div>
+            <div class="num">$XXX</div>
+            <div class="lbl">Costo por paciente (CAC)</div>
           </div>
           <div class="stat">
-            <div class="num">—</div>
-            <div class="lbl"><span class="todo">Completar</span><br>Inversión en medios</div>
+            <div class="num">$XXX</div>
+            <div class="lbl">Inversión en medios</div>
           </div>
         </div>
       </div>
@@ -391,16 +396,44 @@
         </div>
       </div>
 
-      <div class="diagram">
-        <div class="dstep"><span>Meta Ads</span></div>
-        <div class="darrow">→</div>
-        <div class="dstep"><span>Landing</span></div>
-        <div class="darrow">→</div>
-        <div class="dstep"><span>WhatsApp</span></div>
-        <div class="darrow">→</div>
-        <div class="dstep"><span>Agenda</span></div>
-        <div class="darrow">→</div>
-        <div class="dstep featured"><span>Paciente</span></div>
+      <div class="diagram-wrap">
+        <svg class="diagram-svg" viewBox="0 0 960 76" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Box 1: Meta Ads -->
+          <rect x="2" y="14" width="140" height="48" rx="2" fill="#faf9f5" stroke="rgba(166,124,61,0.28)" stroke-width="1"/>
+          <text x="72" y="39" text-anchor="middle" dominant-baseline="central" fill="#12151c" font-family="'IBM Plex Mono', monospace" font-size="12.5" font-weight="500" letter-spacing="0.05em">META ADS</text>
+
+          <!-- Arrow 1 -->
+          <line x1="148" y1="38" x2="194" y2="38" stroke="#a67c3d" stroke-width="1.5"/>
+          <polygon points="194,34 202,38 194,42" fill="#a67c3d"/>
+
+          <!-- Box 2: Landing -->
+          <rect x="208" y="14" width="140" height="48" rx="2" fill="#faf9f5" stroke="rgba(166,124,61,0.28)" stroke-width="1"/>
+          <text x="278" y="39" text-anchor="middle" dominant-baseline="central" fill="#12151c" font-family="'IBM Plex Mono', monospace" font-size="12.5" font-weight="500" letter-spacing="0.05em">LANDING</text>
+
+          <!-- Arrow 2 -->
+          <line x1="354" y1="38" x2="400" y2="38" stroke="#a67c3d" stroke-width="1.5"/>
+          <polygon points="400,34 408,38 400,42" fill="#a67c3d"/>
+
+          <!-- Box 3: WhatsApp -->
+          <rect x="414" y="14" width="140" height="48" rx="2" fill="#faf9f5" stroke="rgba(166,124,61,0.28)" stroke-width="1"/>
+          <text x="484" y="39" text-anchor="middle" dominant-baseline="central" fill="#12151c" font-family="'IBM Plex Mono', monospace" font-size="12.5" font-weight="500" letter-spacing="0.05em">WHATSAPP</text>
+
+          <!-- Arrow 3 -->
+          <line x1="560" y1="38" x2="606" y2="38" stroke="#a67c3d" stroke-width="1.5"/>
+          <polygon points="606,34 614,38 606,42" fill="#a67c3d"/>
+
+          <!-- Box 4: Agenda -->
+          <rect x="620" y="14" width="140" height="48" rx="2" fill="#faf9f5" stroke="rgba(166,124,61,0.28)" stroke-width="1"/>
+          <text x="690" y="39" text-anchor="middle" dominant-baseline="central" fill="#12151c" font-family="'IBM Plex Mono', monospace" font-size="12.5" font-weight="500" letter-spacing="0.05em">AGENDA</text>
+
+          <!-- Arrow 4 -->
+          <line x1="766" y1="38" x2="812" y2="38" stroke="#a67c3d" stroke-width="1.5"/>
+          <polygon points="812,34 820,38 812,42" fill="#a67c3d"/>
+
+          <!-- Box 5: Paciente (Featured / Resaltada en dorado) -->
+          <rect x="824" y="14" width="134" height="48" rx="2" fill="#f1eee6" stroke="#a67c3d" stroke-width="1.5"/>
+          <text x="891" y="39" text-anchor="middle" dominant-baseline="central" fill="#a67c3d" font-family="'IBM Plex Mono', monospace" font-size="12.5" font-weight="600" letter-spacing="0.05em">PACIENTE</text>
+        </svg>
       </div>
       <p class="diagram-caption">Un solo flujo, sin fricción entre el clic y el turno agendado.</p>
     </div>
@@ -466,8 +499,8 @@
         <div class="tier">
           <span class="eyebrow">Starter</span>
           <p class="tier-desc">Para la clínica que nunca corrió una campaña en serio y necesita el primer sistema real de captación, bien hecho desde el día uno.</p>
-          <div class="tier-price"><span class="amt">[Definir]</span><span class="per">setup</span></div>
-          <div class="tier-price sub"><span class="amt">[Definir]</span><span class="per">/mes</span></div>
+          <div class="tier-price"><span class="amt">$350</span><span class="per">setup</span></div>
+          <div class="tier-price sub"><span class="amt">$450</span><span class="per">/mes</span></div>
           <ul>
             <li>1 campaña de Meta Ads activa, segmentada por tratamiento</li>
             <li>Landing de conversión propia (no genérica)</li>
@@ -480,8 +513,8 @@
           <span class="tier-tag">Más elegido</span>
           <span class="eyebrow">Growth</span>
           <p class="tier-desc">El sistema completo: tráfico constante, conversión optimizada y ningún lead se enfría esperando respuesta. Nuestro nivel de trabajo estándar.</p>
-          <div class="tier-price"><span class="amt">[Definir]</span><span class="per">setup</span></div>
-          <div class="tier-price sub"><span class="amt">[Definir]</span><span class="per">/mes</span></div>
+          <div class="tier-price"><span class="amt">$500</span><span class="per">setup</span></div>
+          <div class="tier-price sub"><span class="amt">$800</span><span class="per">/mes</span></div>
           <ul>
             <li>Todo lo de Starter</li>
             <li>2-3 campañas activas en simultáneo, testeadas y optimizadas</li>
@@ -494,8 +527,8 @@
         <div class="tier">
           <span class="eyebrow">Elite</span>
           <p class="tier-desc">Para la clínica que ya lidera su zona y quiere consolidar esa posición: más canales, más datos, decisiones al detalle.</p>
-          <div class="tier-price"><span class="amt">[Definir]</span><span class="per">setup</span></div>
-          <div class="tier-price sub"><span class="amt">[Definir]</span><span class="per">/mes</span></div>
+          <div class="tier-price"><span class="amt">$700</span><span class="per">setup</span></div>
+          <div class="tier-price sub"><span class="amt">$1,400</span><span class="per">/mes</span></div>
           <ul>
             <li>Todo lo de Growth</li>
             <li>Gestión de reputación y reseñas online</li>
@@ -539,16 +572,9 @@
 <footer>
   <div class="wrap foot-row">
     <div class="mark">
-      <img src="assets/logo.png" alt="LIGHT PARTNERS" class="logo-mark">
       <span class="wordmark">LIGHT PARTNERS</span>
     </div>
-    <div style="display:flex; align-items:center; gap:24px; flex-wrap:wrap;">
-      <a href="https://discord.gg/GWeSmF49m" target="_blank" rel="noopener noreferrer" style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--gold); text-decoration:none; display:inline-flex; align-items:center; gap:7px; letter-spacing:.04em;">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.929 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.894.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
-        Discord Server
-      </a>
-      <span class="fine">Growth Partners para clínicas dentales y médicas</span>
-    </div>
+    <span class="fine">Growth Partners para clínicas dentales y médicas</span>
   </div>
 </footer>
 
