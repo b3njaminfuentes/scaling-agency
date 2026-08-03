@@ -21,6 +21,8 @@ niche: "Clínicas Dentales & Centros Médicos"
 
 # 📌 LIGHT PARTNERS — DOCUMENTO MAESTRO
 
+![Logo LIGHT PARTNERS](assets/logo.png)
+
 > [!ABSTRACT] Resumen Ejecutivo
 > Este documento representa la **fuente de verdad operacional y estratégica** de **LIGHT PARTNERS**. No somos una agencia tradicional de marketing ni un estudio creativo: somos **Growth Partners** especializados en la adquisición predecible de pacientes de alto valor para clínicas odontológicas y centros médicos a través de infraestructura tecnológica, tráfico quirúrgico y automatización con IA.
 

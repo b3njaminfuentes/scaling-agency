@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LIGHT PARTNERS — Growth Partners para Clínicas</title>
 <meta name="description" content="Diseñamos el sistema de adquisición de pacientes para clínicas dentales y médicas: tráfico de precisión, infraestructura de conversión y reportes que no dejan dudas.">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<meta property="og:title" content="LIGHT PARTNERS — Growth Partners para Clínicas">
+<meta property="og:description" content="El sistema completo de adquisición de pacientes para clínicas odontológicas y médicas.">
+<meta property="og:image" content="https://light-partners.vercel.app/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,340;9..144,440;9..144,560&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -44,6 +50,9 @@
     text-transform:uppercase;
     color:var(--gold);
     font-weight:500;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
   }
   h1,h2,h3{
     font-family:'Fraunces',serif;
@@ -81,8 +90,9 @@
     display:flex; align-items:center; justify-content:space-between;
     height:76px;
   }
-  .mark{display:flex; align-items:center; gap:10px; text-decoration:none;}
-  .halo{width:22px; height:22px;}
+  .mark{display:flex; align-items:center; gap:12px; text-decoration:none;}
+  .logo-mark{height:30px; width:auto; object-fit:contain; transition:transform .25s ease;}
+  .mark:hover .logo-mark{transform:translateY(-2px) scale(1.05);}
   .wordmark{
     font-family:'IBM Plex Mono',monospace;
     font-size:14px;
@@ -290,9 +300,7 @@
 <header>
   <nav class="wrap">
     <a href="#" class="mark">
-      <svg class="halo" viewBox="0 0 40 40" fill="none">
-        <path d="M20 3 A17 17 0 1 1 19.9 3" stroke="#a47c3b" stroke-width="1.4"/>
-      </svg>
+      <img src="assets/logo.png" alt="LIGHT PARTNERS" class="logo-mark">
       <span class="wordmark">LIGHT PARTNERS<small>GROWTH PARTNERS</small></span>
     </a>
     <a href="#apply" class="btn">Solicitar Growth Audit</a>
@@ -306,7 +314,7 @@
       <circle cx="550" cy="550" r="430" stroke="#a47c3b" stroke-opacity=".14" stroke-width="1"/>
     </svg>
     <div class="wrap hero-inner">
-      <span class="eyebrow">Growth Partners — Clínicas dentales y médicas</span>
+      <span class="eyebrow"><img src="assets/logo-gold.png" alt="" style="height:15px; width:auto; vertical-align:middle; margin-right:4px;">Growth Partners — Clínicas dentales y médicas</span>
       <h1>La demanda no debería ser <em>accidental</em>.</h1>
       <p class="lede">Diseñamos el sistema de adquisición de pacientes para clínicas que ya son excelentes en lo suyo y necesitan que se note: tráfico de precisión, infraestructura de conversión y reportes que no dejan dudas.</p>
       <div class="hero-cta">
@@ -531,9 +539,7 @@
 <footer>
   <div class="wrap foot-row">
     <div class="mark">
-      <svg class="halo" viewBox="0 0 40 40" fill="none">
-        <path d="M20 3 A17 17 0 1 1 19.9 3" stroke="#a47c3b" stroke-width="1.4"/>
-      </svg>
+      <img src="assets/logo.png" alt="LIGHT PARTNERS" class="logo-mark">
       <span class="wordmark">LIGHT PARTNERS</span>
     </div>
     <div style="display:flex; align-items:center; gap:24px; flex-wrap:wrap;">

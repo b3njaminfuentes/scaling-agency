@@ -1,8 +1,13 @@
+<p align="center">
+  <img src="assets/logo.png" alt="LIGHT PARTNERS" width="90" height="auto" />
+</p>
+
 # LIGHT PARTNERS — Growth Partners para Clínicas
 
 > **"La demanda no debería ser accidental."**
 
 Repositorio oficial y centro de operaciones de **LIGHT PARTNERS**, firma de *Growth Partnership* especializada en clínicas dentales y centros médicos.
+
 
 ---
 
