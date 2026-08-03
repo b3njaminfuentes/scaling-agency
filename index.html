@@ -27,6 +27,12 @@
     --gold:#a47c3b;
     --gold-soft:#c9a968;
     --gold-faint:rgba(164,124,59,.22);
+    --teal:#2f5d52;
+    --teal-soft:#5c8c80;
+    --teal-faint:rgba(47,93,82,.18);
+    --rust:#a8562e;
+    --rust-soft:#c47a4f;
+    --rust-faint:rgba(168,86,46,.18);
     --slate:#6b7280;
     --max:1180px;
   }
@@ -43,9 +49,22 @@
     font-size:16px;
     line-height:1.6;
     -webkit-font-smoothing:antialiased;
+    position:relative;
+  }
+  body::before{
+    content:'';
+    position:fixed; inset:0;
+    pointer-events:none;
+    z-index:9999;
+    opacity:.035;
+    mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
   .wrap{max-width:var(--max); margin:0 auto; padding:0 32px;}
   a{color:inherit;}
+  .icon-gold{color:var(--gold);}
+  .icon-teal{color:var(--teal);}
+  .icon-rust{color:var(--rust);}
   .eyebrow{
     font-family:'IBM Plex Mono',monospace;
     font-size:11.5px;
@@ -106,6 +125,11 @@
     box-shadow:0 4px 30px rgba(18,21,28,.08);
     background:rgba(231,227,218,.95);
   }
+  .scroll-progress{
+    position:absolute; left:0; bottom:-1px; height:2px; width:0%;
+    background:linear-gradient(90deg, var(--gold), var(--teal));
+    transition:width .12s linear;
+  }
   nav.wrap{
     display:flex; align-items:center; justify-content:space-between;
     height:76px;
@@ -151,9 +175,16 @@
     padding:150px 0 130px;
     overflow:hidden;
   }
+  .hero::after{
+    content:'';
+    position:absolute; inset:0; z-index:1; pointer-events:none;
+    background:
+      radial-gradient(560px circle at 14% 22%, rgba(164,124,59,.07), transparent 62%),
+      radial-gradient(520px circle at 82% 78%, rgba(47,93,82,.07), transparent 62%);
+  }
   .hero-halo{
     position:absolute;
-    top:-420px; left:50%;
+    top:calc(-420px + var(--halo-shift, 0px)); left:50%;
     transform:translateX(-50%);
     width:1100px; height:1100px;
     pointer-events:none;
@@ -178,13 +209,14 @@
   .hero h1 em{
     font-style:italic;
     font-weight:440;
-    color:var(--gold);
+    background:linear-gradient(100deg, var(--gold) 20%, var(--teal-soft) 85%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
     display:inline-block;
     animation:heroEmGlow 3s ease 1.4s infinite alternate;
   }
   @keyframes heroEmGlow{
-    from{text-shadow:0 0 0 transparent}
-    to{text-shadow:0 0 28px rgba(164,124,59,.25)}
+    from{filter:drop-shadow(0 0 0 transparent)}
+    to{filter:drop-shadow(0 0 20px rgba(47,93,82,.3))}
   }
   .hero p.lede{
     font-size:18px;
@@ -252,6 +284,7 @@
     font-family:'Fraunces',serif; font-weight:340; font-size:2.4rem; color:var(--ink); line-height:1;
     transition:color .3s ease;
   }
+  .stat-icon{width:20px; height:20px; margin-bottom:12px; opacity:.85;}
   .stat:hover .num{color:var(--gold);}
   .stat .lbl{font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--slate); margin-top:10px;}
   .stat .lbl .todo{color:var(--gold);}
@@ -263,6 +296,8 @@
     opacity:0; transform:translateY(24px);
     transition:opacity .7s ease, transform .7s ease;
   }
+  .mech-icon{width:28px; height:28px; margin-bottom:16px; transition:transform .35s ease;}
+  .mech-item:hover .mech-icon{transform:scale(1.1) rotate(-4deg);}
   .mech-item.in{opacity:1; transform:translateY(0);}
   .mech-item h3{
     font-size:1.3rem; margin-bottom:12px; font-weight:440;
@@ -394,7 +429,8 @@
     transition:transform .3s ease, color .3s ease;
   }
   .path-row:hover .path-num{transform:scale(1.2); color:var(--gold);}
-  .path-row h3{color:var(--bone-soft); font-size:1.3rem; font-weight:440;}
+  .path-row h3{color:var(--bone-soft); font-size:1.3rem; font-weight:440; display:flex; align-items:center; gap:12px;}
+  .path-icon{width:20px; height:20px; flex-shrink:0;}
   .path-row p{color:rgba(231,227,218,.68); font-size:14.5px; max-width:440px;}
 
   /* ===== OFFER ===== */
@@ -405,17 +441,28 @@
   }
   .offer-card:hover{background:var(--bone-soft); transform:translateY(-3px);}
   .offer-card .eyebrow{display:block; margin-bottom:14px;}
+  .offer-icon{width:26px; height:26px; margin-bottom:16px;}
   .offer-card p{color:var(--ink-soft); font-size:14.5px;}
   .guarantee{
-    border:1px solid var(--gold); padding:32px; background:var(--bone-soft);
+    border-left:3px solid var(--gold);
+    padding:44px 40px; background:var(--ink);
     max-width:720px;
-    transition:box-shadow .4s ease;
-    position:relative;
+    position:relative; overflow:hidden;
+    transition:box-shadow .4s ease, transform .35s ease;
   }
-  .guarantee:hover{box-shadow:0 8px 32px rgba(164,124,59,.12);}
-  .guarantee p{font-family:'Fraunces',serif; font-style:italic; font-size:1.2rem; line-height:1.5; color:var(--ink);}
+  .guarantee::before{
+    content:'\201C'; position:absolute; top:-56px; left:20px;
+    font-family:'Fraunces',serif; font-style:italic; font-size:200px; line-height:1;
+    color:rgba(164,124,59,.16); pointer-events:none; user-select:none;
+  }
+  .guarantee:hover{box-shadow:0 16px 48px rgba(18,21,28,.28); transform:translateY(-3px);}
+  .guarantee p{
+    font-family:'Fraunces',serif; font-style:italic; font-size:1.2rem; line-height:1.5;
+    color:var(--bone-soft); position:relative; z-index:1;
+  }
 
   /* ===== TIERS ===== */
+  .pricing{background:var(--bone-soft);}
   .tiers{display:grid; grid-template-columns:repeat(3,1fr); gap:24px; align-items:stretch;}
   .tier{
     position:relative;
@@ -426,6 +473,14 @@
     transition:transform .35s ease, box-shadow .35s ease, border-color .35s ease;
     opacity:0; transform:translateY(30px);
   }
+  .tier::before{
+    content:''; position:absolute; top:0; left:0; right:0; height:4px;
+    background:var(--rust);
+  }
+  .tier.featured::before{background:var(--gold);}
+  .tier.elite::before{background:var(--teal);}
+  .tier-icon{width:26px; height:26px; margin-top:4px; margin-bottom:2px; transition:transform .35s ease;}
+  .tier:hover .tier-icon{transform:scale(1.12) rotate(-6deg);}
   .tier.in{opacity:1; transform:translateY(0);}
   .tier:hover{
     transform:translateY(-6px);
@@ -437,6 +492,12 @@
     background:var(--bone-soft);
   }
   .tier.featured:hover{box-shadow:0 16px 48px rgba(164,124,59,.18);}
+  .tier.elite{border-color:rgba(47,93,82,.3);}
+  .tier.elite:hover{border-color:var(--teal); box-shadow:0 16px 48px rgba(47,93,82,.18);}
+  .tier.elite .tier-price .amt{color:var(--teal);}
+  .tier.elite li::before{color:var(--teal);}
+  .tier.elite .tier-fit{color:var(--teal); border-top-color:var(--teal-faint);}
+  .tier.elite .tier-btn:hover{color:var(--teal); border-color:var(--teal);}
   .tier-tag{
     position:absolute; top:-13px; left:28px;
     background:var(--gold); color:var(--paper);
@@ -461,6 +522,9 @@
   .tier-fit{
     font-family:'Fraunces',serif; font-style:italic; font-size:13.5px;
     color:var(--gold); margin-top:20px; padding-top:16px; border-top:1px solid var(--gold-faint);
+  }
+  .tier-btn{
+    width:100%; justify-content:center; margin-top:20px;
   }
   .tiers-note{
     margin-top:36px; font-family:'IBM Plex Mono',monospace; font-size:12px;
@@ -497,6 +561,13 @@
     align-self:flex-start; margin-top:8px; background:var(--gold); border-color:var(--gold); color:var(--ink);
   }
   .apply .btn:hover{background:transparent; color:var(--bone-soft); border-color:var(--gold-soft);}
+  .apply .btn:disabled{opacity:.6; cursor:not-allowed; transform:none;}
+  .form-msg{
+    font-family:'IBM Plex Mono',monospace; font-size:13px; letter-spacing:.02em;
+    margin-top:4px; min-height:1em;
+  }
+  .form-msg.success{color:var(--gold-soft);}
+  .form-msg.error{color:#e39a8f;}
 
   /* ===== FOOTER ===== */
   footer{padding:56px 0 64px; border-top:1px solid var(--gold-faint);}
@@ -504,8 +575,11 @@
   .foot-row .fine{font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--slate); letter-spacing:.04em;}
 
   /* ===== REVEAL ===== */
-  .reveal{opacity:0; transform:translateY(28px); transition:opacity .8s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.22,1,.36,1);}
-  .reveal.in{opacity:1; transform:translateY(0);}
+  .reveal{
+    opacity:0; transform:translateY(28px) scale(.986); filter:blur(5px);
+    transition:opacity .9s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.22,1,.36,1), filter .9s ease;
+  }
+  .reveal.in{opacity:1; transform:translateY(0) scale(1); filter:blur(0);}
 
   /* ===== SMOOTH RULE LINE ===== */
   .rule{
@@ -589,7 +663,7 @@
 
     /* Hero */
     .hero{padding:92px 0 54px;}
-    .hero-halo{width:640px; height:640px; top:-260px;}
+    .hero-halo{width:640px; height:640px; top:calc(-260px + var(--halo-shift, 0px));}
     .hero h1{font-size:clamp(2rem, 8.5vw, 2.75rem); line-height:1.1; margin:16px 0 18px;}
     .hero p.lede{font-size:15.5px; line-height:1.55; margin-bottom:26px;}
     .hero-cta{flex-direction:column; align-items:stretch; gap:12px;}
@@ -668,6 +742,7 @@
     </a>
     <a href="#apply" class="btn">Solicitar Growth Audit</a>
   </nav>
+  <div class="scroll-progress"></div>
 </header>
 
 <main>
@@ -675,6 +750,7 @@
     <svg class="hero-halo" viewBox="0 0 1100 1100" fill="none">
       <circle cx="550" cy="550" r="480" stroke="#a47c3b" stroke-opacity=".28" stroke-width="1"/>
       <circle cx="550" cy="550" r="430" stroke="#a47c3b" stroke-opacity=".14" stroke-width="1"/>
+      <circle cx="550" cy="550" r="370" stroke="#2f5d52" stroke-opacity=".12" stroke-width="1"/>
     </svg>
     <svg class="watermark-hero" viewBox="0 0 200 200" fill="currentColor">
       <path d="M100 0C100 65 135 100 200 100C135 100 100 135 100 200C100 135 65 100 0 100C65 100 100 65 100 0Z"/>
@@ -717,18 +793,22 @@
         </div>
         <div class="stats">
           <div class="stat">
+            <svg class="stat-icon icon-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 6"/><polyline points="15 6 21 6 21 12"/></svg>
             <div class="num">65</div>
             <div class="lbl">Pacientes nuevos<br>en una semana</div>
           </div>
           <div class="stat">
+            <svg class="stat-icon icon-teal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 11 14 9 22 21 10 13 10 13 2"/></svg>
             <div class="num">14 <span style="font-size:1.1rem;">días</span></div>
             <div class="lbl">De implementación<br>a resultados</div>
           </div>
           <div class="stat">
+            <svg class="stat-icon icon-rust" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none"/><line x1="12" y1="1.5" x2="12" y2="4.5"/><line x1="12" y1="19.5" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.5" y2="12"/><line x1="19.5" y1="12" x2="22.5" y2="12"/></svg>
             <div class="num">$XXX</div>
             <div class="lbl">Costo por paciente (CAC)</div>
           </div>
           <div class="stat">
+            <svg class="stat-icon icon-teal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10v4a1 1 0 0 0 1 1h2l4 4V5L6 9H4a1 1 0 0 0-1 1z"/><path d="M17 8a4 4 0 0 1 0 8"/></svg>
             <div class="num">$XXX</div>
             <div class="lbl">Inversión en medios</div>
           </div>
@@ -747,14 +827,17 @@
       </div>
       <div class="mech-grid">
         <div class="mech-item">
+          <svg class="mech-icon icon-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none"/><line x1="12" y1="1.5" x2="12" y2="4.5"/><line x1="12" y1="19.5" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.5" y2="12"/><line x1="19.5" y1="12" x2="22.5" y2="12"/></svg>
           <h3>Tráfico quirúrgico</h3>
           <p>Campañas de Meta Ads segmentadas por especialidad y momento de intención de compra. No disparamos a ciegas: cada creativo está diseñado para el paciente que ya está buscando su tratamiento.</p>
         </div>
         <div class="mech-item">
+          <svg class="mech-icon icon-teal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h18l-6.5 8v7l-5 2v-9z"/></svg>
           <h3>Infraestructura de conversión</h3>
           <p>Un lead frío no sirve. Construimos la landing, el seguimiento automatizado y el flujo de respuesta para que cada contacto se convierta en un turno agendado antes de que cierre la pestaña.</p>
         </div>
         <div class="mech-item">
+          <svg class="mech-icon icon-rust" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="13"/><line x1="10" y1="21" x2="10" y2="8"/><line x1="16" y1="21" x2="16" y2="3"/><line x1="2" y1="21" x2="22" y2="21" stroke-opacity=".4"/></svg>
           <h3>Reporting sin humo</h3>
           <p>Nada de alcance ni impresiones como métrica de éxito. Medimos costo por paciente agendado, y eso es lo único que reportamos quincenalmente.</p>
         </div>
@@ -898,17 +981,17 @@
       <div class="path-list">
         <div class="path-row">
           <span class="path-num">I</span>
-          <h3>Diagnóstico</h3>
+          <h3><svg class="path-icon icon-rust" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15.5" y2="15.5"/></svg>Diagnóstico</h3>
           <p>Auditamos su presencia actual — ads, web, flujo de agenda — y definimos un objetivo concreto de pacientes nuevos.</p>
         </div>
         <div class="path-row">
           <span class="path-num">II</span>
-          <h3>Implementación</h3>
+          <h3><svg class="path-icon icon-teal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h18l-6.5 8v7l-5 2v-9z"/></svg>Implementación</h3>
           <p>Montamos la campaña y la infraestructura de conversión. El setup fee cubre esta etapa por completo.</p>
         </div>
         <div class="path-row">
           <span class="path-num">III</span>
-          <h3>Escala</h3>
+          <h3><svg class="path-icon icon-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 6"/><polyline points="15 6 21 6 21 12"/></svg>Escala</h3>
           <p>Optimización continua con fee mensual y reporting quincenal — sin sorpresas, sin promesas vacías.</p>
         </div>
       </div>
@@ -923,10 +1006,12 @@
       </div>
       <div class="offer-grid">
         <div class="offer-card">
+          <svg class="offer-icon icon-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 1 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.8 2.8-2-2z"/></svg>
           <span class="eyebrow">Setup fee</span>
           <p>Pago único que cubre la integración técnica: cuenta de ads, pixel, landing y flujo de automatización. Sin esto no arrancamos nada a medias.</p>
         </div>
         <div class="offer-card">
+          <svg class="offer-icon icon-teal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg>
           <span class="eyebrow">Fee mensual</span>
           <p>Gestión continua de campañas e infraestructura. Fijo, predecible, y sujeto a revisión con cada reporte quincenal.</p>
         </div>
@@ -939,14 +1024,16 @@
 
   <hr class="rule">
 
-  <section class="reveal">
+  <section class="pricing reveal">
     <div class="wrap">
       <div class="section-head">
         <span class="eyebrow">Paquetes</span>
         <h2>Tres niveles de acompañamiento, un mismo sistema.</h2>
       </div>
+      <!-- precios a validar con CAC real, pendiente de confirmación -->
       <div class="tiers">
         <div class="tier">
+          <svg class="tier-icon icon-rust" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.8 2.8M15.2 15.2 18 18M18 6l-2.8 2.8M8.8 15.2 6 18"/></svg>
           <span class="eyebrow">Starter</span>
           <p class="tier-desc">Para la clínica que nunca corrió una campaña en serio y necesita el primer sistema real de captación, bien hecho desde el día uno.</p>
           <div class="tier-price"><span class="amt">$350</span><span class="per">setup</span></div>
@@ -958,9 +1045,11 @@
             <li>Reporting mensual con costo por paciente agendado</li>
           </ul>
           <p class="tier-fit">Ideal si hoy dependen casi por completo del boca en boca.</p>
+          <button type="button" class="btn tier-btn" data-tier="Starter">Solicitar Growth Audit</button>
         </div>
         <div class="tier featured">
           <span class="tier-tag">Más elegido</span>
+          <svg class="tier-icon icon-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 6"/><polyline points="15 6 21 6 21 12"/></svg>
           <span class="eyebrow">Growth</span>
           <p class="tier-desc">El sistema completo: tráfico constante, conversión optimizada y ningún lead se enfría esperando respuesta. Nuestro nivel de trabajo estándar.</p>
           <div class="tier-price"><span class="amt">$500</span><span class="per">setup</span></div>
@@ -973,8 +1062,10 @@
             <li>Reporting quincenal con revisión de estrategia</li>
           </ul>
           <p class="tier-fit">Ideal si ya tienen algo de flujo de pacientes y quieren volverlo predecible.</p>
+          <button type="button" class="btn tier-btn" data-tier="Growth">Solicitar Growth Audit</button>
         </div>
-        <div class="tier">
+        <div class="tier elite">
+          <svg class="tier-icon icon-teal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20M9 3l3 6-3 12M15 3l-3 6 3 12" stroke-opacity=".5"/></svg>
           <span class="eyebrow">Elite</span>
           <p class="tier-desc">Para la clínica que ya lidera su zona y quiere consolidar esa posición: más canales, más datos, decisiones al detalle.</p>
           <div class="tier-price"><span class="amt">$700</span><span class="per">setup</span></div>
@@ -987,6 +1078,7 @@
             <li>Soporte prioritario y canal directo con el equipo</li>
           </ul>
           <p class="tier-fit">Ideal si buscan dominar su categoría, no solo llenar la agenda.</p>
+          <button type="button" class="btn tier-btn" data-tier="Elite">Solicitar Growth Audit</button>
         </div>
       </div>
       <p class="tiers-note">No vendemos paquetes cerrados: vendemos etapas de crecimiento. Empezamos donde su clínica está hoy.</p>
@@ -1003,20 +1095,31 @@
         <h2>Solicitá tu Growth Audit gratuito.</h2>
         <p>En 20 minutos revisamos su presencia digital, tracking, funnel y reputación online, y le entregamos un diagnóstico concreto de dónde está perdiendo pacientes hoy. Sin compromiso, sin venta forzada.</p>
       </div>
-      <form onsubmit="event.preventDefault(); this.querySelector('.btn').textContent='Auditoría solicitada';">
+      <form id="growth-audit-form" action="https://formspree.io/f/TU_FORM_ID" method="POST">
         <div class="field">
           <label for="nombre">Nombre completo</label>
-          <input id="nombre" type="text" placeholder="Ej. Dra. Fernández" required>
+          <input id="nombre" name="nombre" type="text" placeholder="Ej. Dra. Fernández" required>
         </div>
         <div class="field">
           <label for="whatsapp">WhatsApp</label>
-          <input id="whatsapp" type="tel" placeholder="Ej. +54 9 11 xxxx xxxx" required>
+          <input id="whatsapp" name="whatsapp" type="tel" placeholder="Ej. +54 9 11 xxxx xxxx" required>
         </div>
         <div class="field">
           <label for="clinica">Instagram o sitio web de la clínica</label>
-          <input id="clinica" type="text" placeholder="Ej. @clinicavillarroel" required>
+          <input id="clinica" name="clinica" type="text" placeholder="Ej. @clinicavillarroel" required>
         </div>
+        <div class="field">
+          <label for="paquete">Paquete de interés</label>
+          <select id="paquete" name="paquete">
+            <option value="">Sin especificar</option>
+            <option value="Starter">Starter</option>
+            <option value="Growth">Growth</option>
+            <option value="Elite">Elite</option>
+          </select>
+        </div>
+        <input type="hidden" name="_subject" value="Nueva solicitud de Growth Audit — Light Partners">
         <button class="btn" type="submit">Solicitar Growth Audit</button>
+        <p class="form-msg" role="status" aria-live="polite"></p>
       </form>
     </div>
   </section>
@@ -1038,6 +1141,8 @@
 (function(){
   'use strict';
 
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   /* === Header shadow on scroll === */
   const header = document.querySelector('header');
   let ticking = false;
@@ -1050,6 +1155,53 @@
       ticking = true;
     }
   });
+
+  /* === Scroll progress bar + hero halo parallax === */
+  const progressBar = document.querySelector('.scroll-progress');
+  const heroHalo = document.querySelector('.hero-halo');
+  let scrollRaf = false;
+  function onScrollEffects(){
+    const doc = document.documentElement;
+    const scrollable = doc.scrollHeight - window.innerHeight;
+    const pct = scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0;
+    if(progressBar) progressBar.style.width = pct + '%';
+    if(heroHalo && !prefersReduced){
+      heroHalo.style.setProperty('--halo-shift', Math.min(window.scrollY * 0.12, 90) + 'px');
+    }
+    scrollRaf = false;
+  }
+  window.addEventListener('scroll', ()=>{
+    if(!scrollRaf){ requestAnimationFrame(onScrollEffects); scrollRaf = true; }
+  });
+  onScrollEffects();
+
+  /* === Subtle tilt on tier cards === */
+  if(!prefersReduced){
+    document.querySelectorAll('.tier').forEach(card=>{
+      let tiltRaf = null;
+      card.addEventListener('pointermove', (e)=>{
+        const rect = card.getBoundingClientRect();
+        const relX = (e.clientX - rect.left) / rect.width - 0.5;
+        const relY = (e.clientY - rect.top) / rect.height - 0.5;
+        if(tiltRaf) cancelAnimationFrame(tiltRaf);
+        tiltRaf = requestAnimationFrame(()=>{
+          card.style.transform = `perspective(900px) rotateX(${(-relY*3.5).toFixed(2)}deg) rotateY(${(relX*3.5).toFixed(2)}deg) translateY(-6px)`;
+        });
+      });
+      card.addEventListener('pointerleave', ()=>{ card.style.transform = ''; });
+    });
+
+    /* === Magnetic buttons === */
+    document.querySelectorAll('.btn').forEach(btn=>{
+      btn.addEventListener('pointermove', (e)=>{
+        const rect = btn.getBoundingClientRect();
+        const x = (e.clientX - rect.left - rect.width/2) * 0.18;
+        const y = (e.clientY - rect.top - rect.height/2) * 0.35;
+        btn.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px)`;
+      });
+      btn.addEventListener('pointerleave', ()=>{ btn.style.transform = ''; });
+    });
+  }
 
   /* === Section reveal observer === */
   const revealObs = new IntersectionObserver((entries)=>{
@@ -1196,6 +1348,51 @@
     });
   }, {threshold:.3});
   document.querySelectorAll('.stats').forEach(el=>statObs.observe(el));
+
+  /* === Tier CTA buttons: scroll to #apply + preselect paquete === */
+  const paqueteSelect = document.getElementById('paquete');
+  document.querySelectorAll('.tier-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const tier = btn.dataset.tier;
+      if(paqueteSelect && tier) paqueteSelect.value = tier;
+      document.getElementById('apply').scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  });
+
+  /* === Growth Audit form: submit to Formspree without leaving the page === */
+  const auditForm = document.getElementById('growth-audit-form');
+  if(auditForm){
+    auditForm.addEventListener('submit', async (e)=>{
+      e.preventDefault();
+      const submitBtn = auditForm.querySelector('.btn');
+      const msgEl = auditForm.querySelector('.form-msg');
+      const originalLabel = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Enviando...';
+      msgEl.textContent = '';
+      msgEl.classList.remove('success','error');
+      try{
+        const response = await fetch(auditForm.action, {
+          method:'POST',
+          body:new FormData(auditForm),
+          headers:{ 'Accept':'application/json' }
+        });
+        if(response.ok){
+          auditForm.reset();
+          Array.from(auditForm.querySelectorAll('.field, button')).forEach(el=>el.style.display='none');
+          msgEl.classList.add('success');
+          msgEl.textContent = 'Recibimos tu solicitud, te contactamos en menos de 24hs.';
+        } else {
+          throw new Error('Formspree respondió con error');
+        }
+      }catch(err){
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalLabel;
+        msgEl.classList.add('error');
+        msgEl.textContent = 'No pudimos enviar tu solicitud. Probá de nuevo o escribinos directo por WhatsApp.';
+      }
+    });
+  }
 
 })();
 </script>
