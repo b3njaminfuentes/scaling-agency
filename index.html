@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>ClinicOS — El Sistema Operativo Integral para Clínicas Dentales</title>
-<meta name="description" content="Expediente digital, odontograma 3D interactivo, presupuestos en un clic y agenda médica inteligente. ClinicOS es la plataforma todo en uno para odontólogos modernos.">
+<title>ClinicOS — El Sistema Operativo de IA para tu Clínica Dental</title>
+<meta name="description" content="ClinicOS es su recepcionista digital: responde WhatsApp 24/7, agenda pacientes, recupera citas perdidas y organiza su consultorio mientras usted hace odontología.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg?v=2">
 <meta name="theme-color" content="#12151c">
-<meta property="og:title" content="ClinicOS — Sistema Operativo Dental">
-<meta property="og:description" content="Automatiza la administración y el expediente clínico digital de tu centro odontológico.">
+<meta property="og:title" content="ClinicOS — Sistema Operativo de IA para Clínicas">
+<meta property="og:description" content="Automatiza la recepción y el expediente odontológico digital de tu clínica.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -29,6 +29,7 @@
     --rust-soft:#c47a4f;
     --slate:#6b7280;
     --max:1180px;
+    --green-chat:#d9fdd3;
   }
   *{margin:0;padding:0;box-sizing:border-box;}
   html{scroll-behavior:smooth;}
@@ -61,7 +62,7 @@
   .icon-rust{color:var(--rust);}
   .eyebrow{
     font-family:'IBM Plex Mono',monospace;
-    font-size:11.5px;
+    font-size:11px;
     letter-spacing:.18em;
     text-transform:uppercase;
     color:var(--gold);
@@ -110,7 +111,7 @@
   .btn-secondary{
     background:transparent;
     color:var(--ink);
-    border:1px solid rgba(18,21,28,.2);
+    border:1px solid rgba(18,21,28,0.2);
   }
   .btn-secondary:hover{
     background:var(--ink);
@@ -127,7 +128,7 @@
     transition:box-shadow .4s ease, background .4s ease;
   }
   header.scrolled{
-    box-shadow:0 4px 30px rgba(18,21,28,.05);
+    box-shadow:0 4px 30px rgba(18,21,28,0.05);
     background:rgba(250, 249, 245, 0.95);
   }
   .scroll-progress{
@@ -176,7 +177,7 @@
   /* ===== HERO ===== */
   .hero{
     position:relative;
-    padding:110px 0 100px;
+    padding:90px 0 80px;
     overflow:hidden;
     background:var(--paper);
   }
@@ -187,34 +188,24 @@
       radial-gradient(560px circle at 10% 20%, rgba(164,124,59,.06), transparent 70%),
       radial-gradient(520px circle at 90% 80%, rgba(47,93,82,.06), transparent 70%);
   }
-  .hero-halo{
-    position:absolute;
-    top:calc(-420px + var(--halo-shift, 0px)); left:50%;
-    transform:translateX(-50%);
-    width:1100px; height:1100px;
-    pointer-events:none;
-    animation:haloSpin 90s linear infinite, haloFadeIn 2s ease forwards;
-    opacity:0;
-  }
-  @keyframes haloSpin{from{transform:translateX(-50%) rotate(0deg)}to{transform:translateX(-50%) rotate(360deg)}}
-  @keyframes haloFadeIn{to{opacity:1}}
   .hero-inner{
     position:relative; z-index:2;
     display:grid;
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:1.05fr 0.95fr;
     gap:48px;
     align-items:center;
   }
   .hero-text{
-    max-width:540px;
+    max-width:560px;
   }
   .hero .eyebrow{
     opacity:0; animation:heroSlideUp .8s ease .2s forwards;
+    margin-bottom:10px;
   }
   .hero h1{
-    font-size:clamp(2.4rem, 4.8vw, 3.8rem);
-    line-height:1.06;
-    margin:18px 0 22px;
+    font-size:clamp(2.3rem, 4.5vw, 3.4rem);
+    line-height:1.08;
+    margin:12px 0 20px;
     opacity:0; animation:heroSlideUp .9s ease .4s forwards;
   }
   .hero h1 em{
@@ -225,9 +216,9 @@
     display:inline-block;
   }
   .hero p.lede{
-    font-size:17px;
+    font-size:16.5px;
     color:var(--ink-soft);
-    margin-bottom:34px;
+    margin-bottom:30px;
     opacity:0; animation:heroSlideUp .9s ease .6s forwards;
   }
   .hero-cta{
@@ -238,14 +229,8 @@
     from{opacity:0; transform:translateY(30px)}
     to{opacity:1; transform:translateY(0)}
   }
-  .hero-cta .fine{
-    font-family:'IBM Plex Mono',monospace;
-    font-size:11px;
-    color:var(--slate);
-    letter-spacing:.03em;
-  }
 
-  /* Interactive Odontogram Preview Box */
+  /* Interactive Odontogram Box */
   .hero-preview{
     position:relative;
     z-index:3;
@@ -259,14 +244,14 @@
   }
   .preview-header{
     display:flex;
-    justify-content:between;
+    justify-content:space-between;
     align-items:center;
     border-bottom:1px solid var(--gold-faint);
     padding-bottom:12px;
     margin-bottom:20px;
   }
   .preview-header h3{
-    font-size:15px;
+    font-size:13px;
     font-family:'IBM Plex Mono', monospace;
     text-transform:uppercase;
     letter-spacing:0.05em;
@@ -367,7 +352,7 @@
   /* ===== SOCIAL PROOF / ASSOCIATED CLINICS ===== */
   .clients{
     background:var(--bone-soft);
-    padding:44px 0;
+    padding:34px 0;
     border-top:1px solid var(--gold-faint);
     border-bottom:1px solid var(--gold-faint);
   }
@@ -412,71 +397,161 @@
   section{padding:96px 0;}
   .section-head{max-width:640px; margin-bottom:56px;}
   .section-head h2{font-size:clamp(1.8rem,3vw,2.5rem); margin-top:14px;}
+  .section-head p{color:var(--ink-soft); margin-top:10px;}
 
-  /* ===== FEATURES ===== */
-  .features-grid{
+  /* ===== CLINICOS RECEPTIONIST (LO REAL - VA PRIMERO) ===== */
+  .receptionist-sec{
+    background:var(--paper);
+  }
+  .receptionist-grid{
     display:grid;
-    grid-template-columns:repeat(3, 1fr);
-    gap:40px;
+    grid-template-columns:1fr 1fr;
+    gap:64px;
+    align-items:center;
   }
-  .feat-card{
-    border-top:1px solid var(--ink);
-    padding-top:24px;
-    transition:transform 0.3s ease;
-  }
-  .feat-card:hover{
-    transform:translateY(-3px);
-  }
-  .feat-card h3{
-    font-size:20px;
-    font-weight:400;
-    margin-bottom:12px;
-    transition:color 0.3s;
-  }
-  .feat-card:hover h3{
-    color:var(--gold);
-  }
-  .feat-card p{
-    font-size:14.5px;
-    color:var(--ink-soft);
-    line-height:1.55;
-  }
-  .feat-icon{
-    width:24px;
-    height:24px;
+  .receptionist-copy h2{
+    font-size:clamp(1.8rem,3.2vw,2.4rem);
     margin-bottom:16px;
-    color:var(--gold);
+  }
+  .receptionist-bullets{
+    list-style:none;
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+    margin-top:28px;
+  }
+  .receptionist-bullets li{
+    position:relative;
+    padding-left:28px;
+    font-size:15px;
+    color:var(--ink-soft);
+  }
+  .receptionist-bullets li strong{
+    color:var(--ink);
+    display:block;
+    margin-bottom:2px;
+  }
+  .receptionist-bullets li::before{
+    content:'';
+    position:absolute;
+    left:0;
+    top:6px;
+    width:14px;
+    height:14px;
+    background:var(--gold-soft);
+    border-radius:50%;
+    opacity:0.8;
   }
 
-  /* ===== MOCKUP SECTION (CODE REPRODUCTION) ===== */
-  .mockup-sec{
-    background:var(--ink);
+  /* WhatsApp Interactive Sandbox Chat Simulation */
+  .whatsapp-mockup{
+    background:#efeae2;
+    border:1px solid #ddd;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 24px 60px rgba(18,21,28,0.06);
+    font-size:14px;
+    display:flex;
+    flex-direction:column;
+    height:420px;
+  }
+  .wa-header{
+    background:#075e54;
+    color:#fff;
+    padding:12px 16px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .wa-avatar{
+    width:32px;
+    height:32px;
+    background:var(--gold);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+    font-size:12px;
+  }
+  .wa-info{
+    display:flex;
+    flex-direction:column;
+  }
+  .wa-name{
+    font-weight:600;
+  }
+  .wa-status{
+    font-size:10px;
+    opacity:0.8;
+  }
+  .wa-body{
+    flex:1;
+    padding:16px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    overflow-y:auto;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' opacity='0.06'%3E%3Cpath d='M0 0h100v100H0z' fill='none'/%3E%3Cpath d='M25 10c0 5-5 10-10 10S5 15 5 10s5-10 10-10 10 5 10 10zM75 60c0 5-5 10-10 10s-10-5-10-10 5-10 10-10 10 5 10 10z' fill='%23000'/%3E%3C/svg%3E");
+  }
+  .wa-msg{
+    max-width:85%;
+    padding:8px 12px;
+    border-radius:8px;
+    position:relative;
+    animation:msgPop 0.4s ease forwards;
+    opacity:0;
+    transform:translateY(10px);
+  }
+  @keyframes msgPop{to{opacity:1; transform:translateY(0)}}
+  .wa-msg.patient{
+    background:#fff;
+    align-self:flex-start;
+    border-top-left-radius:0;
+  }
+  .wa-msg.assistant{
+    background:var(--green-chat);
+    align-self:flex-end;
+    border-top-right-radius:0;
+  }
+  .wa-time{
+    font-size:9px;
+    color:var(--slate);
+    text-align:right;
+    display:block;
+    margin-top:4px;
+  }
+
+  /* ===== EL MECANISMO (TECHNICAL AND ACCURACY SHOWCASE) ===== */
+  .mech-sec{
+    background:#161b22;
+    color:#e6edf3;
+    border-top:1px solid rgba(231,227,218,0.06);
+    border-bottom:1px solid rgba(231,227,218,0.06);
+  }
+  .mech-sec h2{
     color:var(--bone-soft);
   }
-  .mockup-sec h2{
-    color:var(--bone-soft);
-  }
-  .mockup-sec .eyebrow{
+  .mech-sec .eyebrow{
     color:var(--gold-soft);
   }
-  .mockup-grid{
+  .mech-grid{
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:64px;
     align-items:center;
   }
   .code-window{
-    background:#161b22;
-    border:1px solid rgba(231,227,218,0.12);
+    background:#0d1117;
+    border:1px solid rgba(231,227,218,0.1);
     border-radius:8px;
     font-family:'IBM Plex Mono', monospace;
     font-size:12px;
-    color:#e6edf3;
     overflow:hidden;
     box-shadow:0 24px 60px rgba(0,0,0,0.3);
   }
   .code-header{
-    background:#0d1117;
+    background:#161b22;
     padding:10px 16px;
     display:flex;
     align-items:center;
@@ -509,6 +584,65 @@
   .code-str { color: #a5d6ff; }
   .code-comment { color: #8b949e; }
   .code-type { color: #ff9b50; }
+
+  /* ===== ROADMAP - HACIA DÓNDE VAMOS (DISTINTO ESTILO VISUAL) ===== */
+  .roadmap-sec{
+    background:var(--ink);
+    color:var(--bone-soft);
+    position:relative;
+    overflow:hidden;
+  }
+  .roadmap-sec h2{
+    color:var(--bone-soft);
+  }
+  .roadmap-sec .eyebrow{
+    color:var(--gold-soft);
+  }
+  .roadmap-sec p.section-intro{
+    color:rgba(231,227,218,0.7);
+    max-width:600px;
+    margin-top:12px;
+  }
+  .roadmap-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:32px;
+    margin-top:56px;
+  }
+  .roadmap-card{
+    background:var(--ink-soft);
+    border:1px dashed var(--gold-faint);
+    border-radius:8px;
+    padding:32px;
+    position:relative;
+    transition:border-color 0.3s;
+  }
+  .roadmap-card:hover{
+    border-color:var(--gold);
+  }
+  .roadmap-badge{
+    position:absolute;
+    top:20px;
+    right:24px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:9px;
+    text-transform:uppercase;
+    color:var(--gold-soft);
+    border:1px solid var(--gold-soft);
+    padding:3px 8px;
+    border-radius:4px;
+    letter-spacing:0.05em;
+  }
+  .roadmap-card h3{
+    color:var(--bone-soft);
+    font-size:18px;
+    margin-bottom:12px;
+  }
+  .roadmap-card p{
+    color:rgba(231,227,218,0.65);
+    font-size:14px;
+    line-height:1.55;
+  }
 
   /* ===== CASE STUDY (VILLARROEL CLINIC) ===== */
   .case-clinic{
@@ -674,6 +808,13 @@
     width:100%;
     justify-content:center;
   }
+  .pricing-disclaimer{
+    text-align:center;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--slate);
+    margin-top:36px;
+  }
 
   /* ===== DEMO FORM ===== */
   .demo-sec{
@@ -817,16 +958,15 @@
       gap:24px;
     }
 
-    /* Features */
-    .features-grid{
-      grid-template-columns:1fr;
-      gap:28px;
-    }
-
-    /* Mockup */
-    .mockup-grid{
+    /* Receptionist & Mockup */
+    .receptionist-grid, .mech-grid{
       grid-template-columns:1fr;
       gap:40px;
+    }
+
+    /* Roadmap */
+    .roadmap-grid{
+      grid-template-columns:1fr;
     }
 
     /* Case Clinic */
@@ -865,7 +1005,7 @@
       </svg>
       <span class="wordmark-fraunces"><span class="brand-light">Clinic</span><span class="brand-partners">OS</span></span>
     </a>
-    <a href="#demo" class="btn">Probar Demo</a>
+    <a href="#demo" class="btn">Solicitar Demo</a>
   </nav>
   <div class="scroll-progress"></div>
 </header>
@@ -875,19 +1015,19 @@
   <section class="hero">
     <div class="wrap hero-inner">
       <div class="hero-text">
-        <span class="eyebrow">Expediente Clínico & Gestión Integral</span>
-        <h1>El sistema operativo definitivo para tu <em>clínica</em>.</h1>
-        <p class="lede">Automatiza la administración dental. Controla expedientes clínicos avanzados, odontogramas 3D interactivos, recordatorios por WhatsApp y cotizaciones en 1 clic. Diseñado para odontólogos que buscan excelencia.</p>
+        <span class="eyebrow">ClinicOS — El sistema operativo de IA para tu clínica.</span>
+        <h1>Deje de perder pacientes por desorden operativo.</h1>
+        <p class="lede">ClinicOS es su recepcionista digital: responde WhatsApp 24/7, agenda citas, recupera pacientes que faltaron y organiza su clínica mientras usted hace odontología.</p>
         <div class="hero-cta">
-          <a href="#demo" class="btn">Solicitar Acceso Demo</a>
-          <a href="#features" class="btn btn-secondary">Explorar Módulos</a>
+          <a href="#demo" class="btn">Solicitar Demostración Gratuita</a>
+          <a href="#receptionist" class="btn btn-secondary">Cómo funciona</a>
         </div>
       </div>
 
-      <!-- Live Interactive Showcase -->
+      <!-- Interactive Odontogram Box (Fiel al código de Odontogram.tsx) -->
       <div class="hero-preview">
         <div class="preview-header">
-          <h3>Simulador ClinicOS</h3>
+          <h3>Ficha Clínica · Odontograma</h3>
           <span class="preview-status" id="demo-tooth-status">Pieza 11 · Sano</span>
         </div>
         <div class="odontogram-demo">
@@ -980,7 +1120,7 @@
             </defs>
           </svg>
 
-          <!-- Floating tooth operation menu -->
+          <!-- Floating tooth menu -->
           <div class="tooth-menu active" id="demo-tooth-menu">
             <button class="menu-btn active" data-action="normal">Sano</button>
             <button class="menu-btn" data-action="caries">Caries</button>
@@ -1011,65 +1151,53 @@
     </div>
   </section>
 
-  <!-- FEATURES SECTION -->
-  <section id="features" class="reveal">
-    <div class="wrap">
-      <div class="section-head">
-        <span class="eyebrow">Módulos Core</span>
-        <h2>Diseñado para el flujo clínico diario de tu consultorio.</h2>
+  <!-- CLINICOS RECEPTIONIST (LO REAL, DISPONIBLE HOY) -->
+  <section id="receptionist" class="receptionist-sec reveal">
+    <div class="wrap receptionist-grid">
+      <div class="receptionist-copy">
+        <span class="eyebrow">Disponible Hoy</span>
+        <h2>No es un chatbot básico.<br>Es su recepcionista digital 24/7.</h2>
+        <p>ClinicOS Receptionist se integra directamente con el WhatsApp de su clínica y su agenda de turnos en tiempo real.</p>
+        <ul class="receptionist-bullets">
+          <li>
+            <strong>Atiende fuera de horario</strong>
+            No pierda pacientes que escriben los domingos o a las 11 PM. El bot responde con empatía clínica al instante.
+          </li>
+          <li>
+            <strong>Agenda y reagenda turnos</strong>
+            Coordina horarios disponibles directamente desde el calendario interno sin cruzarse con otras citas.
+          </li>
+          <li>
+            <strong>Recupera pacientes ausentes</strong>
+            Detecta automáticamente pacientes que no asistieron a sus citas y les ofrece reagendar para liberar espacios.
+          </li>
+          <li>
+            <strong>Deriva a humanos de forma inteligente</strong>
+            Cuando un paciente tiene una consulta médica compleja o urgencia real, transfiere la conversación a su personal.
+          </li>
+        </ul>
       </div>
-      <div class="features-grid">
-        <!-- Feat 1 -->
-        <div class="feat-card">
-          <svg class="feat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
-          <h3>Expediente Clínico Digital</h3>
-          <p>Organiza documentos, fotos del caso clínico (antes/después), notas de evolución y radiografías en un solo perfil unificado por paciente.</p>
+
+      <!-- Simulated WhatsApp Conversation -->
+      <div class="whatsapp-mockup">
+        <div class="wa-header">
+          <div class="wa-avatar">C</div>
+          <div class="wa-info">
+            <span class="wa-name">Asistente ClinicOS</span>
+            <span class="wa-status">en línea (24/7)</span>
+          </div>
         </div>
-        <!-- Feat 2 -->
-        <div class="feat-card">
-          <svg class="feat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="1" fill="currentColor"/><line x1="12" y1="1.5" x2="12" y2="4.5"/><line x1="12" y1="19.5" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.5" y2="12"/><line x1="19.5" y1="12" x2="22.5" y2="12"/></svg>
-          <h3>Odontograma Interactivo</h3>
-          <p>Dibuja en tiempo real las afecciones dentales de tus pacientes. Diagnósticos visuales claros con soporte 3D para una mejor explicación.</p>
-        </div>
-        <!-- Feat 3 -->
-        <div class="feat-card">
-          <svg class="feat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          <h3>Agenda Médica Inteligente</h3>
-          <p>Evita dobles reservas, controla la disponibilidad por sillón dental y automatiza notificaciones de confirmación vía WhatsApp.</p>
-        </div>
-        <!-- Feat 4 -->
-        <div class="feat-card">
-          <svg class="feat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-          <h3>Cotizaciones en un Clic</h3>
-          <p>Elabora presupuestos claros para tratamientos dentales. Impresión limpia configurada para generar una cotización profesional de 1 página.</p>
-        </div>
-        <!-- Feat 5 -->
-        <div class="feat-card">
-          <svg class="feat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          <h3>Portal del Paciente</h3>
-          <p>Espacio propio donde tus pacientes pueden verificar sus turnos programados, historial de pagos y ver sus radiografías cargadas.</p>
-        </div>
-        <!-- Feat 6 -->
-        <div class="feat-card">
-          <svg class="feat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-          <h3>Reportería & Administración</h3>
-          <p>Monitorea ingresos, planes de financiación activos y el desempeño de los odontólogos colaboradores sin planillas de cálculo.</p>
+        <div class="wa-body" id="chat-simulation-container">
+          <!-- Live conversation will animate here via JavaScript -->
         </div>
       </div>
     </div>
   </section>
 
-  <!-- MOCKUP SECTION (REAL CODE COMPONENT SHOWCASE) -->
-  <section class="mockup-sec reveal">
-    <div class="wrap mockup-grid">
-      <div>
-        <span class="eyebrow">Arquitectura robusta</span>
-        <h2>Código limpio para herramientas complejas.</h2>
-        <p style="margin: 20px 0; font-size:15px; opacity:0.85;">ClinicOS está construido sobre la infraestructura más veloz del mercado. Nuestro módulo de odontograma renderiza directamente gráficos vectoriales parametrizados a través de estados reactivos en TypeScript.</p>
-        <p style="font-size:15px; opacity:0.85;">Esto se traduce en cargas instantáneas, compatibilidad completa con Safari de iOS en iPhone y cero desfases al registrar la ficha médica.</p>
-      </div>
-
-      <!-- Code Window Reproduction from Odontogram.tsx -->
+  <!-- SECTION EL MECANISMO (TECHNICAL ACCURACY) -->
+  <section class="mech-sec reveal">
+    <div class="wrap mech-grid">
+      <!-- Code Window showing real Odontogram.tsx logic -->
       <div class="code-window">
         <div class="code-header">
           <div class="code-dots">
@@ -1079,7 +1207,7 @@
           </div>
           <span class="code-filename">components/Odontogram.tsx</span>
         </div>
-        <pre class="code-body"><code><span class="code-comment">// Siluetas dentales reactivas para renderizado 3D</span>
+        <pre class="code-body"><code><span class="code-comment">// Siluetas dentales y esmalte vectorial</span>
 <span class="code-kw">type</span> <span class="code-type">ToothState</span> = <span class="code-str">'normal'</span> | <span class="code-str">'caries'</span> | <span class="code-str">'corona'</span> | <span class="code-str">'implante'</span>;
 
 <span class="code-kw">const</span> <span class="code-type">CROWN</span> = {
@@ -1099,10 +1227,55 @@
   );
 }</code></pre>
       </div>
+
+      <div>
+        <span class="eyebrow">Precisión e Ingeniería</span>
+        <h2>No somos otra agenda digital.</h2>
+        <p style="margin:20px 0; font-size:15px; opacity:0.85;">Construimos herramientas de precisión clínica. Nuestro sistema renderiza directamente siluetas anatómicas vectoriales parametrizadas con soporte de tipo FDI, agilizando el registro médico de diagnósticos.</p>
+        <p style="font-size:15px; opacity:0.85;">Con código estructurado y almacenamiento seguro sobre Supabase PostgreSQL, garantizamos un expediente digital rápido, seguro y exportable.</p>
+      </div>
     </div>
   </section>
 
-  <!-- CASE STUDY SECTION (VILLARROEL DENTAL CLINIC) -->
+  <!-- HACIA DÓNDE VAMOS - ROADMAP (VISUALMENTE DIFERENTE, SIN BOTONES/CTA) -->
+  <section class="roadmap-sec reveal" id="roadmap">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Roadmap Futuro</span>
+        <h2>Hacia dónde vamos</h2>
+        <p class="section-intro">Esta es nuestra visión a largo plazo para automatizar por completo la gestión médica. Lo que viene a continuación está actualmente en fase de diseño y desarrollo activo.</p>
+      </div>
+
+      <div class="roadmap-grid">
+        <!-- Roadmap 1 -->
+        <div class="roadmap-card">
+          <span class="roadmap-badge">Próximamente</span>
+          <h3>ClinicOS Manager</h3>
+          <p>Un resumen matutino diario de su clínica en lenguaje natural. Reciba directamente en su WhatsApp el volumen de facturación proyectado para el día, presupuestos pendientes de aprobación y huecos en la agenda.</p>
+        </div>
+        <!-- Roadmap 2 -->
+        <div class="roadmap-card">
+          <span class="roadmap-badge">En desarrollo</span>
+          <h3>ClinicOS Scribe</h3>
+          <p>Historia clínica generada automáticamente por voz. Registre de forma segura notas de evolución y diagnósticos mediante dictado por IA mientras atiende al paciente en el sillón clínico.</p>
+        </div>
+        <!-- Roadmap 3 -->
+        <div class="roadmap-card">
+          <span class="roadmap-badge">Próximamente</span>
+          <h3>ClinicOS Finance</h3>
+          <p>Recomendaciones inteligentes de optimización financiera. Analice costos operativos de tratamientos, comisiones de odontólogos colaboradores y tasa de retención de pacientes basada en sus propios datos históricos.</p>
+        </div>
+        <!-- Roadmap 4 -->
+        <div class="roadmap-card">
+          <span class="roadmap-badge">En desarrollo</span>
+          <h3>Clinic Brain</h3>
+          <p>Consulte la base de datos de su clínica haciendo preguntas simples ("¿Cuál fue el tratamiento más solicitado este mes?", "¿Qué paciente tiene pagos vencidos?"). Sin dashboards complicados.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CASE STUDY (VILLARROEL DENTAL CLINIC) -->
   <section class="case-clinic reveal">
     <div class="wrap case-grid">
       <div class="case-copy">
@@ -1155,6 +1328,7 @@
             <li>Hasta 300 pacientes activos</li>
             <li>Expediente clínico básico</li>
             <li>Agenda inteligente integrada</li>
+            <li>WhatsApp integrado básico</li>
           </ul>
           <button type="button" class="btn tier-btn" data-plan="Starter">Solicitar Demo</button>
         </div>
@@ -1169,7 +1343,7 @@
             <li>Pacientes ilimitados</li>
             <li>Odontograma interactivo avanzado</li>
             <li>Generador de cotizaciones rápidas</li>
-            <li>Portal del Paciente básico</li>
+            <li>Asistente WhatsApp 24/7 (Recepción)</li>
           </ul>
           <button type="button" class="btn tier-btn" data-plan="Profesional">Solicitar Demo</button>
         </div>
@@ -1187,6 +1361,7 @@
           <button type="button" class="btn tier-btn" data-plan="Enterprise">Contactar Ventas</button>
         </div>
       </div>
+      <p class="pricing-disclaimer">Algunas funciones avanzadas están en fase de lanzamiento progresivo.</p>
     </div>
   </section>
 
@@ -1269,17 +1444,6 @@
   const menu = document.getElementById('demo-tooth-menu');
   let activeFdi = "11";
 
-  const TOOTH_NAMES = {
-    "14": "Premolar 14",
-    "13": "Canino 13",
-    "12": "Incisivo Lateral 12",
-    "11": "Incisivo Central 11",
-    "21": "Incisivo Central 21",
-    "22": "Incisivo Lateral 22",
-    "23": "Canino 23",
-    "24": "Premolar 24"
-  };
-
   const STATE_LABELS = {
     "normal": "Sano",
     "caries": "Caries detectada",
@@ -1289,17 +1453,14 @@
 
   teeth.forEach(tooth => {
     tooth.addEventListener('click', () => {
-      // Remove selected class from others
       teeth.forEach(t => t.classList.remove('selected'));
       tooth.classList.add('selected');
 
       activeFdi = tooth.dataset.fdi;
       const state = tooth.dataset.state;
 
-      // Update label
       statusLabel.textContent = `Pieza ${activeFdi} · ${STATE_LABELS[state]}`;
 
-      // Activate corresponding menu button
       const menuBtns = menu.querySelectorAll('.menu-btn');
       menuBtns.forEach(btn => {
         btn.classList.toggle('active', btn.dataset.action === state);
@@ -1307,25 +1468,20 @@
     });
   });
 
-  // Menu action buttons logic
   menu.querySelectorAll('.menu-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const action = btn.dataset.action;
       const activeTooth = document.querySelector(`.tooth-demo[data-fdi="${activeFdi}"]`);
       if(!activeTooth) return;
 
-      // Set new state on tooth dataset
       activeTooth.dataset.state = action;
 
-      // Update menu buttons active state
       menu.querySelectorAll('.menu-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
 
-      // Update svg colors in tooth
       const svg = activeTooth.querySelector('svg');
       const path = svg.querySelector('path');
 
-      // Remove previous caries/implante features
       const oldCaries = svg.querySelectorAll('circle');
       oldCaries.forEach(c => c.remove());
       const oldLines = svg.querySelectorAll('line');
@@ -1339,7 +1495,6 @@
         path.setAttribute('fill', 'url(#gradient-normal)');
         path.setAttribute('stroke', '#cdd6d1');
         path.setAttribute('stroke-width', '1.2');
-        // Add red circles for caries simulation
         const c1 = document.createElementNS("http://www.w3.org/2000/svg", "circle");
         c1.setAttribute("cx", "20");
         c1.setAttribute("cy", "24");
@@ -1360,7 +1515,6 @@
         path.setAttribute('fill', 'url(#gradient-implante)');
         path.setAttribute('stroke', '#7d8a91');
         path.setAttribute('stroke-width', '1.2');
-        // Add horizontal grid lines for implant
         const l1 = document.createElementNS("http://www.w3.org/2000/svg", "line");
         l1.setAttribute("x1", "16");
         l1.setAttribute("y1", "36");
@@ -1379,10 +1533,59 @@
         svg.appendChild(l2);
       }
 
-      // Update status text
       statusLabel.textContent = `Pieza ${activeFdi} · ${STATE_LABELS[action]}`;
     });
   });
+
+  /* === WhatsApp Chat Simulation logic === */
+  const chatContainer = document.getElementById('chat-simulation-container');
+  const chatDialogue = [
+    { sender: 'patient', text: 'Hola! Quiero agendar un turno para una limpieza dental esta semana, por favor.' },
+    { sender: 'assistant', text: '¡Hola! Claro que sí. Tenemos disponibilidad para limpieza dental en los siguientes horarios:\n\n📅 Martes 10:00 AM\n📅 Jueves 3:30 PM\n\n¿Le sirve alguno?' },
+    { sender: 'patient', text: 'El martes a las 10:00 me queda perfecto.' },
+    { sender: 'assistant', text: '¡Excelente! He agendado su turno para el **Martes a las 10:00 AM** con la Dra. Villarroel.\n\nLe enviaré un recordatorio 24 horas antes. ¡Que tenga un gran día! 🦷' }
+  ];
+
+  let currentMsgIndex = 0;
+
+  function renderNextMessage() {
+    if (currentMsgIndex >= chatDialogue.length) {
+      // Loop dialogue back
+      setTimeout(() => {
+        chatContainer.innerHTML = '';
+        currentMsgIndex = 0;
+        renderNextMessage();
+      }, 5000);
+      return;
+    }
+
+    const msg = chatDialogue[currentMsgIndex];
+    const msgEl = document.createElement('div');
+    msgEl.className = `wa-msg ${msg.sender}`;
+    msgEl.innerHTML = `
+      <p style="white-space: pre-line;">${msg.text}</p>
+      <span class="wa-time">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
+    `;
+
+    chatContainer.appendChild(msgEl);
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+
+    currentMsgIndex++;
+    // Set delay for typing realistic timing
+    const delay = msg.text.length * 20 + 800;
+    setTimeout(renderNextMessage, delay);
+  }
+
+  // Start WhatsApp animation loop when visible
+  const chatObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting && currentMsgIndex === 0) {
+        renderNextMessage();
+        chatObserver.unobserve(e.target);
+      }
+    });
+  }, {threshold: 0.2});
+  if(chatContainer) chatObserver.observe(chatContainer);
 
   /* === Scroll Reveal Observer === */
   const revealObs = new IntersectionObserver((entries)=>{
@@ -1392,7 +1595,7 @@
         revealObs.unobserve(e.target);
       }
     });
-  }, {threshold:.1});
+  }, {threshold:.05});
   document.querySelectorAll('.reveal').forEach(el=>revealObs.observe(el));
 
   /* === Pricing preselect plan === */
