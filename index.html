@@ -927,6 +927,7 @@
   @media (max-width:960px){
     .wrap{padding:0 20px;}
     section{padding:64px 0;}
+    .nav-links a.nav-link { display: none; }
 
     /* Hero */
     .hero{padding:60px 0;}
@@ -1005,7 +1006,13 @@
       </svg>
       <span class="wordmark-fraunces"><span class="brand-light">Clinic</span><span class="brand-partners">OS</span></span>
     </a>
-    <a href="#demo" class="btn">Solicitar Demo</a>
+    
+    <div class="nav-links" style="display: flex; gap: 24px; align-items: center; font-size: 13px; font-family: 'IBM Plex Mono', monospace; font-weight: 500;">
+      <a href="#receptionist" class="nav-link" style="color: var(--ink-soft); transition: color .2s;">WhatsApp IA</a>
+      <a href="#pricing" class="nav-link" style="color: var(--ink-soft); transition: color .2s;">Planes</a>
+      <a href="#roadmap" class="nav-link" style="color: var(--ink-soft); transition: color .2s;">Roadmap</a>
+      <a href="#demo" class="btn">Probar 7 Días Gratis →</a>
+    </div>
   </nav>
   <div class="scroll-progress"></div>
 </header>
