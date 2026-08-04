@@ -862,45 +862,125 @@
       display: grid;
       grid-template-columns: 1fr;
       gap: 2rem;
-      align-items: center;
-      margin-top: 3rem;
+      align-items: stretch;
+      margin-top: 3.5rem;
     }
     @media (min-width: 960px) { .pricing-grid { grid-template-columns: repeat(3, 1fr); } }
     
     .price-card {
-      background: white;
+      background: #ffffff;
+      color: var(--ink);
       border-radius: 24px;
-      padding: 2.5rem 2rem;
-      border: 1px solid var(--bone);
-      transition: all 0.3s;
+      padding: 3rem 2.25rem 2.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+    }
+    .price-card h3 {
+      font-family: var(--font-serif);
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #0a0d14 !important;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+    .price-card .price-amount {
+      font-family: var(--font-serif);
+      font-size: 3.2rem;
+      font-weight: 700;
+      color: #0a0d14 !important;
+      line-height: 1;
+      margin: 1.25rem 0 0.5rem;
+    }
+    .price-card .price-amount span {
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: #64748b !important;
+      font-family: var(--font-sans);
+    }
+    .price-card .plan-desc {
+      color: #475569 !important;
+      font-size: 0.95rem;
+      font-weight: 500;
+      min-height: 2.8rem;
+      line-height: 1.4;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid #f1f5f9;
+      padding-bottom: 1rem;
+    }
+    .price-card .price-features {
+      list-style: none;
+      margin: 0 0 2.5rem 0;
+      flex-grow: 1;
+      padding: 0;
+    }
+    .price-card .price-features li {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      margin-bottom: 1.1rem;
+      font-size: 0.98rem;
+      font-weight: 600;
+      color: #1e293b !important;
+      line-height: 1.4;
+    }
+    .price-card .price-features li svg {
+      width: 22px;
+      height: 22px;
+      color: #059669 !important;
+      flex-shrink: 0;
+      filter: drop-shadow(0 2px 4px rgba(5, 150, 105, 0.25));
+    }
+    .price-card .btn {
+      margin-top: auto;
+      width: 100%;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 0.95rem 1.5rem;
+      text-align: center;
+      justify-content: center;
     }
     .price-card:hover {
       transform: translateY(-8px);
-      box-shadow: 0 20px 40px -10px rgba(0,0,0,0.1);
+      box-shadow: 0 30px 60px -10px rgba(0,0,0,0.5);
     }
+    
+    /* Featured Pro Card */
     .price-card.featured {
-      border-color: var(--gold);
-      box-shadow: 0 0 30px rgba(212,168,83,0.2);
-      transform: scale(1.06);
+      border: 2px solid var(--gold);
+      box-shadow: 0 0 40px rgba(212,168,83,0.35), 0 25px 60px rgba(0,0,0,0.5);
+      transform: scale(1.05);
       z-index: 10;
-      background: rgba(255,255,255,0.9);
-      backdrop-filter: blur(20px);
+      background: #ffffff;
     }
-    .price-card.featured:hover { transform: scale(1.06) translateY(-8px); }
-    @media (max-width: 959px) { .price-card.featured { transform: none; } .price-card.featured:hover { transform: translateY(-8px); } }
+    .price-card.featured:hover {
+      transform: scale(1.05) translateY(-8px);
+      box-shadow: 0 0 50px rgba(212,168,83,0.5), 0 35px 70px rgba(0,0,0,0.6);
+    }
+    @media (max-width: 959px) {
+      .price-card.featured { transform: none; }
+      .price-card.featured:hover { transform: translateY(-8px); }
+    }
     
     .popular-badge {
-      position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
-      background: var(--gold); color: white; padding: 4px 12px; border-radius: 99px;
-      font-size: 0.75rem; font-weight: bold; text-transform: uppercase; letter-spacing: 0.05em;
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #d4a853 0%, #b88628 100%);
+      color: #ffffff !important;
+      padding: 6px 18px;
+      border-radius: 99px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      box-shadow: 0 4px 14px rgba(212,168,83,0.5);
     }
-    
-    .price-amount { font-family: var(--font-serif); font-size: 3rem; color: var(--ink); line-height: 1; margin: 1rem 0; }
-    .price-amount span { font-size: 1rem; color: #666; font-family: var(--font-sans); }
-    
-    .price-features { list-style: none; margin: 2rem 0; }
-    .price-features li { display: flex; gap: 0.75rem; margin-bottom: 1rem; font-size: 0.95rem; }
 
     /* Form */
     .demo-form-wrapper {
@@ -1460,47 +1540,48 @@
       <div class="pricing-grid stagger-reveal">
         <!-- Starter -->
         <div class="price-card">
-          <h3 style="font-size:1.5rem">Starter</h3>
+          <h3>Starter</h3>
           <div class="price-amount">$49<span>/mes</span></div>
-          <p style="color:#666; font-size:0.9rem;">Para consultorios independientes.</p>
+          <p class="plan-desc">Para consultorios independientes que buscan automatizar su recepción.</p>
           <ul class="price-features">
-            <li><svg class="check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> 1 Doctor</li>
-            <li><svg class="check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> 300 Pacientes</li>
-            <li><svg class="check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> Expediente básico</li>
-            <li><svg class="check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> Agenda Multidoc</li>
-            <li><svg class="check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> WhatsApp básico</li>
+            <li><svg class="check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg> 1 Doctor titular</li>
+            <li><svg class="check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg> Hasta 300 Pacientes activos</li>
+            <li><svg class="check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg> Expediente clínico digital 360°</li>
+            <li><svg class="check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg> Agenda Multi-Doctor con anti-conflicto</li>
+            <li><svg class="check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg> Recepcionista WhatsApp 24/7 básica</li>
           </ul>
-          <button class="btn btn-outline" style="width:100%" onclick="selectPlan('starter')">Comenzar 7 Días Gratis</button>
+          <button class="btn btn-outline" onclick="selectPlan('starter')">Comenzar 7 Días Gratis</button>
         </div>
 
         <!-- Profesional -->
         <div class="price-card featured">
           <div class="popular-badge">Más Popular</div>
-          <h3 style="font-size:1.5rem">Profesional</h3>
+          <h3>Profesional</h3>
           <div class="price-amount">$99<span>/mes</span></div>
-          <p style="color:#666; font-size:0.9rem;">Para clínicas en crecimiento.</p>
+          <p class="plan-desc">Para clínicas en crecimiento con múltiples especialistas y alto volumen.</p>
           <ul class="price-features">
-            <li><svg class="check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> 5 Doctores</li>
-            <li><svg class="check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> Pacientes Ilimitados</li>
-            <li><svg class="check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> Odontograma Avanzado</li>
-            <li><svg class="check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> Cefalometría IA</li>
-            <li><svg class="check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> WhatsApp 24/7 IA</li>
+            <li><svg class="check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg> Hasta 5 Doctores colaboradores</li>
+            <li><svg class="check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg> Pacientes e historias Ilimitadas</li>
+            <li><svg class="check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg> Odontograma FDI interactivo de 32 piezas</li>
+            <li><svg class="check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg> Cefalometría IA de Steiner automática</li>
+            <li><svg class="check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg> WhatsApp IA 24/7 + Portal Pacientes</li>
           </ul>
-          <button class="btn btn-primary" style="width:100%" onclick="selectPlan('pro')">Comenzar 7 Días Gratis</button>
+          <button class="btn btn-primary" onclick="selectPlan('pro')">Comenzar 7 Días Gratis</button>
         </div>
 
         <!-- Elite -->
         <div class="price-card">
-          <h3 style="font-size:1.5rem">Elite</h3>
-          <div class="price-amount" style="font-size:1.8rem; margin:2.2rem 0;">Personalizado</div>
-          <p style="color:#666; font-size:0.9rem;">Para redes de clínicas.</p>
+          <h3>Elite</h3>
+          <div class="price-amount" style="font-size:2.2rem; margin:1.25rem 0 0.5rem;">Personalizado</div>
+          <p class="plan-desc">Para redes de clínicas, hospitales y centros odontológicos multicentro.</p>
           <ul class="price-features">
-            <li><svg class="check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> Doctores Ilimitados</li>
-            <li><svg class="check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> Soporte Dedicado</li>
-            <li><svg class="check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> API de Integración</li>
-            <li><svg class="check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> Migración Blanca</li>
+            <li><svg class="check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg> Doctores y sucursales Ilimitadas</li>
+            <li><svg class="check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg> Gerente de cuenta y Soporte Dedicado</li>
+            <li><svg class="check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg> API REST completa y webhooks a medida</li>
+            <li><svg class="check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg> Migración blanca asistida de datos</li>
+            <li><svg class="check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg> SLA de disponibilidad garantizado 99.9%</li>
           </ul>
-          <button class="btn btn-outline" style="width:100%" onclick="window.location.href='#demo'">Contactar Ventas</button>
+          <button class="btn btn-outline" onclick="window.location.href='#demo'">Contactar Ventas</button>
         </div>
       </div>
     </div>
