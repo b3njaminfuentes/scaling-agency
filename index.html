@@ -34,6 +34,9 @@
       --nav-height: 72px;
       --section-pad: clamp(4rem, 8vw, 8rem);
       --container: 1200px;
+      
+      --cyan: #06b6d4;
+      --cyan-glow: rgba(6, 182, 212, 0.15);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -46,6 +49,42 @@
       background-color: var(--paper);
       line-height: 1.6;
       overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background: 
+        radial-gradient(ellipse at 20% 50%, rgba(16, 185, 129, 0.06) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(212, 168, 83, 0.04) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 80%, rgba(6, 182, 212, 0.04) 0%, transparent 50%);
+      animation: meshFloat 20s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes meshFloat {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.7; transform: scale(1.05); }
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background-image:
+        radial-gradient(2px 2px at 20% 30%, rgba(16, 185, 129, 0.2) 50%, transparent 50%),
+        radial-gradient(2px 2px at 40% 70%, rgba(212, 168, 83, 0.15) 50%, transparent 50%),
+        radial-gradient(1.5px 1.5px at 60% 20%, rgba(6, 182, 212, 0.15) 50%, transparent 50%),
+        radial-gradient(2px 2px at 80% 60%, rgba(16, 185, 129, 0.12) 50%, transparent 50%),
+        radial-gradient(1px 1px at 10% 80%, rgba(168, 85, 247, 0.1) 50%, transparent 50%);
+      animation: particleDrift 30s linear infinite;
+      pointer-events: none;
+    }
+    @keyframes particleDrift {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-100vh); }
     }
 
     h1, h2, h3, .font-serif {
@@ -66,6 +105,13 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       padding-right: 0.1em;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, var(--emerald) 0%, var(--cyan) 50%, var(--gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     h2 {
@@ -133,8 +179,8 @@
     }
 
     .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(16,185,129,0.3);
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 8px 30px var(--emerald-glow), 0 0 60px rgba(16, 185, 129, 0.15);
     }
 
     .btn-outline {
@@ -146,6 +192,8 @@
     .btn-outline:hover {
       background: var(--ink);
       color: white;
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 8px 30px rgba(10, 13, 20, 0.15);
     }
     
     .btn-light-outline {
@@ -732,6 +780,16 @@
       width: 8px; height: 8px; border-radius: 50%; background: var(--gold); flex-shrink: 0;
     }
 
+    .tilt-card {
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s ease;
+      transform-style: preserve-3d;
+      perspective: 1000px;
+    }
+    .tilt-card:hover {
+      transform: translateY(-8px) rotateX(2deg) rotateY(-2deg);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15), 0 0 40px var(--emerald-glow);
+    }
+
     /* Features alternating */
     .feature-card {
       background: white;
@@ -1206,11 +1264,27 @@
     
     /* Featured Pro Card */
     .price-card.featured {
-      border: 2px solid var(--gold);
+      position: relative;
+      border: 2px solid transparent !important;
+      background-clip: padding-box;
       box-shadow: 0 0 40px rgba(212,168,83,0.35), 0 25px 60px rgba(0,0,0,0.5);
       transform: scale(1.05);
       z-index: 10;
       background: #ffffff;
+    }
+    .price-card.featured::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 26px;
+      background: linear-gradient(135deg, var(--emerald), var(--cyan), var(--gold), var(--emerald));
+      background-size: 300% 300%;
+      animation: borderGlow 4s ease infinite;
+      z-index: -1;
+    }
+    @keyframes borderGlow {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
     }
     .price-card.featured:hover {
       transform: scale(1.05) translateY(-8px);
@@ -1362,8 +1436,15 @@
     .footer-links a:hover { color: white; }
 
     /* Animations */
-    .zoom-reveal { opacity: 0; transform: scale(0.92); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
-    .zoom-reveal.is-visible { opacity: 1; transform: scale(1); }
+    .zoom-reveal {
+      opacity: 0;
+      transform: translateY(40px) scale(0.97);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .zoom-reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
     
     .stagger-reveal > * { opacity: 0; transform: translateY(20px); transition: all 0.6s ease; }
     .stagger-reveal.is-visible > * { opacity: 1; transform: translateY(0); }
@@ -1383,6 +1464,361 @@
         transform: none !important;
         opacity: 1 !important;
       }
+    }
+
+    /* Activity Heatmap */
+    .heatmap-section { padding: 4rem 0; }
+    .heatmap-grid {
+      display: flex;
+      gap: 3px;
+      flex-wrap: wrap;
+      max-width: 900px;
+      margin: 2rem auto;
+      justify-content: center;
+    }
+    .heat-cell {
+      width: 14px;
+      height: 14px;
+      border-radius: 3px;
+      transition: all 0.2s;
+      cursor: pointer;
+      position: relative;
+    }
+    .heat-cell:hover {
+      transform: scale(1.8);
+      z-index: 2;
+      box-shadow: 0 0 12px var(--emerald-glow);
+    }
+    .heat-0 { background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.1); }
+    .heat-1 { background: rgba(16, 185, 129, 0.2); }
+    .heat-2 { background: rgba(16, 185, 129, 0.4); }
+    .heat-3 { background: rgba(16, 185, 129, 0.65); }
+    .heat-4 { background: var(--emerald); box-shadow: 0 0 8px var(--emerald-glow); }
+    .heatmap-legend {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+      font-size: 0.8rem;
+      color: #64748b;
+    }
+    .heatmap-legend .heat-cell { width: 12px; height: 12px; cursor: default; }
+    .heatmap-legend .heat-cell:hover { transform: none; box-shadow: none; }
+    .heatmap-stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      max-width: 600px;
+      margin: 2.5rem auto 0;
+      text-align: center;
+    }
+    .heatmap-stat-number {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--emerald);
+    }
+    .heatmap-stat-label {
+      font-size: 0.85rem;
+      color: #64748b;
+      margin-top: 0.25rem;
+    }
+
+    /* Patient 360 Hub */
+    .hub-section { background: var(--ink); color: white; }
+    .hub-browser {
+      background: #111827;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+      max-width: 940px;
+      margin: 2.5rem auto 0;
+    }
+    .hub-topbar {
+      background: #1f2937;
+      padding: 0.75rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .hub-topbar .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .hub-topbar .dot:nth-child(1) { background: #ef4444; }
+    .hub-topbar .dot:nth-child(2) { background: #f59e0b; }
+    .hub-topbar .dot:nth-child(3) { background: #22c55e; }
+    .hub-topbar-url {
+      flex: 1;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: #6b7280;
+    }
+    .hub-tabs {
+      display: flex;
+      gap: 0;
+      overflow-x: auto;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      scrollbar-width: none;
+    }
+    .hub-tabs::-webkit-scrollbar { display: none; }
+    .hub-tab {
+      padding: 0.75rem 1.25rem;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: #6b7280;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      white-space: nowrap;
+      transition: all 0.25s;
+      font-family: var(--font-sans);
+      background: none;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+    }
+    .hub-tab:hover { color: #d1d5db; background: rgba(255,255,255,0.03); }
+    .hub-tab.active {
+      color: var(--emerald);
+      border-bottom-color: var(--emerald);
+      background: rgba(16, 185, 129, 0.05);
+    }
+    .hub-content {
+      padding: 2.5rem;
+      min-height: 280px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hub-pane { display: none; width: 100%; }
+    .hub-pane.active { display: block; animation: fadeUp 0.4s ease; }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .hub-kpi-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+    @media (max-width: 768px) { .hub-kpi-row { grid-template-columns: repeat(2, 1fr); } }
+    .hub-kpi {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 1.25rem;
+      text-align: center;
+    }
+    .hub-kpi-val {
+      font-family: var(--font-serif);
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+    .hub-kpi-lbl {
+      font-size: 0.78rem;
+      color: #94a3b8;
+    }
+    /* Mini tooth grid for hub odontogram pane */
+    .mini-tooth-grid {
+      display: flex;
+      justify-content: center;
+      gap: 4px;
+      flex-wrap: wrap;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .mini-tooth {
+      width: 28px;
+      height: 32px;
+      border-radius: 4px 4px 6px 6px;
+      border: 1.5px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.03);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.6rem;
+      color: #6b7280;
+      font-family: var(--font-mono);
+      transition: all 0.2s;
+    }
+    .mini-tooth.has-condition {
+      background: rgba(16, 185, 129, 0.15);
+      border-color: var(--emerald);
+      color: var(--emerald);
+    }
+    .mini-tooth.has-alert {
+      background: rgba(239, 68, 68, 0.12);
+      border-color: var(--danger);
+      color: var(--danger);
+    }
+    /* Timeline for treatments pane */
+    .treatment-timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .timeline-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.75rem 1rem;
+      background: rgba(255,255,255,0.03);
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .timeline-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .timeline-dot.done { background: var(--emerald); box-shadow: 0 0 8px var(--emerald-glow); }
+    .timeline-dot.progress { background: var(--gold); box-shadow: 0 0 8px rgba(212, 168, 83, 0.3); }
+    .timeline-dot.pending { background: #6b7280; }
+    .timeline-text {
+      font-size: 0.88rem;
+      color: #e2e8f0;
+      flex: 1;
+    }
+    .timeline-status {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+    }
+    .timeline-status.done { background: rgba(16,185,129,0.12); color: #34d399; }
+    .timeline-status.progress { background: rgba(212,168,83,0.12); color: var(--gold); }
+    .timeline-status.pending { background: rgba(107,114,128,0.15); color: #9ca3af; }
+
+    /* Financial Dashboard */
+    .finance-mockup {
+      background: linear-gradient(145deg, #0c1a16, #0f231e);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 2.5rem;
+      color: white;
+    }
+    .finance-chart-row {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 8px;
+      height: 140px;
+      margin: 1.5rem 0;
+    }
+    .finance-bar {
+      width: 32px;
+      border-radius: 6px 6px 0 0;
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      cursor: pointer;
+    }
+    .finance-bar:hover {
+      filter: brightness(1.3);
+      transform: scaleY(1.08);
+      transform-origin: bottom;
+    }
+    .finance-bar-label {
+      font-size: 0.65rem;
+      color: #6b7280;
+      text-align: center;
+      margin-top: 0.5rem;
+      font-family: var(--font-mono);
+    }
+    .commission-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 1rem;
+      background: rgba(255,255,255,0.03);
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.05);
+      margin-top: 0.75rem;
+    }
+    .commission-name {
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    .commission-amount {
+      font-family: var(--font-serif);
+      color: var(--emerald);
+      font-weight: 700;
+    }
+
+    /* Patient Portal Phone */
+    .phone-frame {
+      width: 280px;
+      height: 500px;
+      background: #111;
+      border-radius: 36px;
+      padding: 12px;
+      border: 3px solid #333;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.4), inset 0 0 0 1px rgba(255,255,255,0.05);
+      margin: 0 auto;
+      position: relative;
+    }
+    .phone-notch {
+      width: 100px;
+      height: 24px;
+      background: #111;
+      border-radius: 0 0 14px 14px;
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+    }
+    .phone-screen {
+      background: linear-gradient(180deg, #0b1a16, #0f231e);
+      border-radius: 26px;
+      height: 100%;
+      overflow: hidden;
+      padding: 2.5rem 1.25rem 1.25rem;
+      color: white;
+    }
+    .portal-greeting {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      margin-bottom: 1.5rem;
+    }
+    .portal-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 1rem;
+      margin-bottom: 0.75rem;
+    }
+    .portal-card-title {
+      font-size: 0.72rem;
+      color: #6b7280;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .portal-card-value {
+      font-family: var(--font-serif);
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+    .portal-progress-bar {
+      height: 6px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 3px;
+      margin-top: 0.75rem;
+      overflow: hidden;
+    }
+    .portal-progress-fill {
+      height: 100%;
+      border-radius: 3px;
+      background: linear-gradient(90deg, var(--emerald), #06b6d4);
+      transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
   </style>
 </head>
@@ -1753,6 +2189,230 @@
         </div>
       </div>
 
+    </div>
+  </section>
+
+  <!-- Activity Heatmap -->
+  <section class="section heatmap-section">
+    <div class="container zoom-reveal" style="text-align:center;">
+      <span class="eyebrow">Inteligencia Operativa</span>
+      <h2>Visualice el pulso de su clínica <em>en un vistazo</em></h2>
+      <p style="max-width:640px; margin:0 auto 1rem; color:#4b5563;">Mapa de calor de actividad clínica estilo GitHub. Cada celda representa un día: más verde = más pacientes atendidos.</p>
+      <div class="heatmap-grid" id="heatmapGrid"></div>
+      <div class="heatmap-legend">
+        <span>Menos</span>
+        <div class="heat-cell heat-0"></div>
+        <div class="heat-cell heat-1"></div>
+        <div class="heat-cell heat-2"></div>
+        <div class="heat-cell heat-3"></div>
+        <div class="heat-cell heat-4"></div>
+        <span>Más</span>
+      </div>
+      <div class="heatmap-stats-row">
+        <div>
+          <div class="heatmap-stat-number">248</div>
+          <div class="heatmap-stat-label">Días activos este año</div>
+        </div>
+        <div>
+          <div class="heatmap-stat-number">96%</div>
+          <div class="heatmap-stat-label">Tasa de asistencia</div>
+        </div>
+        <div>
+          <div class="heatmap-stat-number">18.4</div>
+          <div class="heatmap-stat-label">Pacientes promedio / día</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Patient 360 Hub -->
+  <section class="section hub-section">
+    <div class="container zoom-reveal" style="text-align:center;">
+      <span class="eyebrow">Expediente 360°</span>
+      <h2 style="color:white">Todo sobre su paciente. <em>En un solo lugar.</em></h2>
+      <p style="max-width:640px; margin:0 auto; color:#94a3b8;">9 vistas especializadas que le dan control total del historial, tratamientos, pagos, imágenes y evolución de cada paciente.</p>
+      <div class="hub-browser">
+        <div class="hub-topbar">
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          <span class="hub-topbar-url">app.clinicos.com/pacientes/maria-gonzales</span>
+        </div>
+        <div class="hub-tabs" id="hubTabs">
+          <button class="hub-tab active" data-hub="resumen">Resumen</button>
+          <button class="hub-tab" data-hub="odontograma">Odontograma</button>
+          <button class="hub-tab" data-hub="tratamientos">Tratamientos</button>
+          <button class="hub-tab" data-hub="pagos">Pagos</button>
+          <button class="hub-tab" data-hub="citas">Citas</button>
+          <button class="hub-tab" data-hub="cefalometria">Cefalometría</button>
+          <button class="hub-tab" data-hub="galeria">Galería</button>
+          <button class="hub-tab" data-hub="historia">Historia Clínica</button>
+        </div>
+        <!-- Pane: Resumen -->
+        <div class="hub-content">
+          <div class="hub-pane active" id="pane-resumen">
+            <div class="hub-kpi-row">
+              <div class="hub-kpi">
+                <div class="hub-kpi-val" style="color:var(--emerald)">12</div>
+                <div class="hub-kpi-lbl">Tratamientos</div>
+              </div>
+              <div class="hub-kpi">
+                <div class="hub-kpi-val" style="color:var(--gold)">$2,450</div>
+                <div class="hub-kpi-lbl">Total Facturado</div>
+              </div>
+              <div class="hub-kpi">
+                <div class="hub-kpi-val" style="color:#06b6d4">28</div>
+                <div class="hub-kpi-lbl">Citas Registradas</div>
+              </div>
+              <div class="hub-kpi">
+                <div class="hub-kpi-val" style="color:#a855f7">96%</div>
+                <div class="hub-kpi-lbl">Asistencia</div>
+              </div>
+            </div>
+          </div>
+          <div class="hub-pane" id="pane-odontograma">
+            <div style="text-align:center">
+              <div style="font-size:0.8rem;color:#6b7280;margin-bottom:1rem;font-family:var(--font-mono)">ARCADA SUPERIOR</div>
+              <div class="mini-tooth-grid">
+                <div class="mini-tooth">18</div><div class="mini-tooth">17</div><div class="mini-tooth has-condition">16</div><div class="mini-tooth">15</div><div class="mini-tooth has-alert">14</div><div class="mini-tooth">13</div><div class="mini-tooth">12</div><div class="mini-tooth">11</div>
+                <div class="mini-tooth">21</div><div class="mini-tooth has-condition">22</div><div class="mini-tooth">23</div><div class="mini-tooth">24</div><div class="mini-tooth">25</div><div class="mini-tooth has-condition">26</div><div class="mini-tooth">27</div><div class="mini-tooth">28</div>
+              </div>
+              <div style="font-size:0.8rem;color:#6b7280;margin:1rem 0;font-family:var(--font-mono)">ARCADA INFERIOR</div>
+              <div class="mini-tooth-grid">
+                <div class="mini-tooth">48</div><div class="mini-tooth has-condition">47</div><div class="mini-tooth">46</div><div class="mini-tooth">45</div><div class="mini-tooth">44</div><div class="mini-tooth">43</div><div class="mini-tooth">42</div><div class="mini-tooth">41</div>
+                <div class="mini-tooth">31</div><div class="mini-tooth">32</div><div class="mini-tooth has-alert">33</div><div class="mini-tooth">34</div><div class="mini-tooth">35</div><div class="mini-tooth">36</div><div class="mini-tooth has-condition">37</div><div class="mini-tooth">38</div>
+              </div>
+              <div style="margin-top:1.5rem;display:flex;justify-content:center;gap:1.5rem;font-size:0.78rem">
+                <span style="color:var(--emerald)">● Restaurado</span>
+                <span style="color:var(--danger)">● Requiere Atención</span>
+                <span style="color:#6b7280">● Sano</span>
+              </div>
+            </div>
+          </div>
+          <div class="hub-pane" id="pane-tratamientos">
+            <div class="treatment-timeline">
+              <div class="timeline-item"><div class="timeline-dot done"></div><div class="timeline-text">Limpieza dental profunda</div><span class="timeline-status done">Completado</span></div>
+              <div class="timeline-item"><div class="timeline-dot done"></div><div class="timeline-text">Endodoncia pieza 14</div><span class="timeline-status done">Completado</span></div>
+              <div class="timeline-item"><div class="timeline-dot progress"></div><div class="timeline-text">Corona porcelana pieza 14</div><span class="timeline-status progress">En curso</span></div>
+              <div class="timeline-item"><div class="timeline-dot pending"></div><div class="timeline-text">Implante titanio pieza 36</div><span class="timeline-status pending">Pendiente</span></div>
+              <div class="timeline-item"><div class="timeline-dot pending"></div><div class="timeline-text">Blanqueamiento LED</div><span class="timeline-status pending">Pendiente</span></div>
+            </div>
+          </div>
+          <div class="hub-pane" id="pane-pagos">
+            <div class="hub-kpi-row">
+              <div class="hub-kpi"><div class="hub-kpi-val" style="color:var(--emerald)">$1,850</div><div class="hub-kpi-lbl">Total Pagado</div></div>
+              <div class="hub-kpi"><div class="hub-kpi-val" style="color:var(--danger)">$600</div><div class="hub-kpi-lbl">Saldo Pendiente</div></div>
+              <div class="hub-kpi"><div class="hub-kpi-val" style="color:var(--gold)">3</div><div class="hub-kpi-lbl">Cuotas Restantes</div></div>
+              <div class="hub-kpi"><div class="hub-kpi-val" style="color:#06b6d4">8</div><div class="hub-kpi-lbl">Recibos Emitidos</div></div>
+            </div>
+          </div>
+          <div class="hub-pane" id="pane-citas">
+            <div class="treatment-timeline">
+              <div class="timeline-item"><div class="timeline-dot" style="background:var(--emerald)"></div><div class="timeline-text">15 Jul 2026 · 10:00 — Dra. Villarroel</div><span class="timeline-status done">Asistió</span></div>
+              <div class="timeline-item"><div class="timeline-dot" style="background:var(--emerald)"></div><div class="timeline-text">22 Jul 2026 · 14:30 — Dra. Villarroel</div><span class="timeline-status done">Asistió</span></div>
+              <div class="timeline-item"><div class="timeline-dot" style="background:var(--gold)"></div><div class="timeline-text">05 Ago 2026 · 09:00 — Dra. Villarroel</div><span class="timeline-status progress">Confirmada</span></div>
+            </div>
+          </div>
+          <div class="hub-pane" id="pane-cefalometria">
+            <div style="text-align:center;color:#94a3b8">
+              <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="margin:0 auto 1rem;display:block;color:var(--emerald)"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"/></svg>
+              <div style="font-size:1.1rem;font-weight:600;color:white;margin-bottom:0.5rem">Análisis Cefalométrico de Steiner</div>
+              <div style="font-size:0.9rem">SNA: 82° · SNB: 80° · ANB: 2° (Clase I Esqueletal)</div>
+              <div style="margin-top:1rem;font-size:0.82rem;color:#6b7280">Trazado interactivo sobre telerradiografía digital con calibración en mm</div>
+            </div>
+          </div>
+          <div class="hub-pane" id="pane-galeria">
+            <div style="text-align:center;color:#94a3b8">
+              <div style="display:flex;justify-content:center;gap:0.75rem;margin-bottom:1rem">
+                <div style="width:80px;height:60px;border-radius:8px;background:linear-gradient(135deg,rgba(16,185,129,0.2),rgba(6,182,212,0.15));display:flex;align-items:center;justify-content:center;font-size:0.65rem;color:#6b7280">Antes</div>
+                <div style="width:80px;height:60px;border-radius:8px;background:linear-gradient(135deg,rgba(16,185,129,0.4),rgba(6,182,212,0.3));display:flex;align-items:center;justify-content:center;font-size:0.65rem;color:white">Después</div>
+                <div style="width:80px;height:60px;border-radius:8px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;font-size:0.65rem;color:#6b7280">Rx</div>
+              </div>
+              <div style="font-size:0.9rem">Galería clínica con comparador Antes/Después interactivo y categorías por tipo de imagen</div>
+            </div>
+          </div>
+          <div class="hub-pane" id="pane-historia">
+            <div style="text-align:center;color:#94a3b8">
+              <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="margin:0 auto 1rem;display:block;color:var(--gold)"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+              <div style="font-size:1.1rem;font-weight:600;color:white;margin-bottom:0.5rem">Anamnesis & Consentimientos</div>
+              <div style="font-size:0.9rem">Historial médico completo con alergias, medicamentos, condiciones sistémicas y firma digital del paciente</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Financial Dashboard -->
+  <section class="section">
+    <div class="container zoom-reveal">
+      <div class="grid-2">
+        <div>
+          <span class="eyebrow">Control Financiero Total</span>
+          <h2>Ingresos, comisiones y proyecciones. <em>En tiempo real.</em></h2>
+          <p>Dashboard financiero con desglose por doctor, cálculo automático de comisiones, simulador de crecimiento y reportes exportables. Nunca más haga cuentas en papel.</p>
+        </div>
+        <div class="finance-mockup">
+          <div style="font-size:0.8rem;color:#6b7280;font-family:var(--font-mono);margin-bottom:0.5rem">INGRESOS MENSUALES 2026</div>
+          <div class="finance-chart-row">
+            <div><div class="finance-bar" style="height:45px;background:linear-gradient(to top,#065f46,var(--emerald))"></div><div class="finance-bar-label">Ene</div></div>
+            <div><div class="finance-bar" style="height:62px;background:linear-gradient(to top,#065f46,var(--emerald))"></div><div class="finance-bar-label">Feb</div></div>
+            <div><div class="finance-bar" style="height:55px;background:linear-gradient(to top,#065f46,var(--emerald))"></div><div class="finance-bar-label">Mar</div></div>
+            <div><div class="finance-bar" style="height:78px;background:linear-gradient(to top,#065f46,var(--emerald))"></div><div class="finance-bar-label">Abr</div></div>
+            <div><div class="finance-bar" style="height:92px;background:linear-gradient(to top,#065f46,var(--emerald))"></div><div class="finance-bar-label">May</div></div>
+            <div><div class="finance-bar" style="height:85px;background:linear-gradient(to top,#065f46,var(--emerald))"></div><div class="finance-bar-label">Jun</div></div>
+            <div><div class="finance-bar" style="height:110px;background:linear-gradient(to top,var(--gold-warm),var(--gold))"></div><div class="finance-bar-label">Jul</div></div>
+            <div><div class="finance-bar" style="height:130px;background:linear-gradient(to top,#b45309,#f59e0b);box-shadow:0 0 16px rgba(245,158,11,0.3)"></div><div class="finance-bar-label">Ago</div></div>
+          </div>
+          <div style="font-size:0.78rem;color:#6b7280;font-family:var(--font-mono);margin-top:1.5rem">COMISIONES POR DOCTOR</div>
+          <div class="commission-row"><span class="commission-name">Dra. Villarroel</span><span class="commission-amount">$4,820</span></div>
+          <div class="commission-row"><span class="commission-name">Dr. Pérez</span><span class="commission-amount">$3,140</span></div>
+          <div class="commission-row"><span class="commission-name">Dra. García</span><span class="commission-amount">$2,670</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portal de Pacientes -->
+  <section class="section bg-dark">
+    <div class="container zoom-reveal">
+      <div class="grid-2" style="align-items:center">
+        <div>
+          <span class="eyebrow">Portal de Pacientes</span>
+          <h2 style="color:white">Su paciente accede <em>sin contraseñas</em>. Con un link mágico.</h2>
+          <p style="color:#94a3b8">Los pacientes reciben un enlace por WhatsApp que los lleva directamente a su portal personal. Sin registros, sin contraseñas olvidadas. Pueden ver sus próximas citas, saldos pendientes, fotos de evolución y descargar sus documentos clínicos.</p>
+          <ul style="list-style:none;padding:0;margin-top:1.5rem;display:flex;flex-direction:column;gap:0.75rem">
+            <li style="display:flex;align-items:center;gap:0.75rem;color:#e2e8f0;font-size:0.95rem"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="#10b981" style="flex-shrink:0"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Próxima cita con cuenta regresiva</li>
+            <li style="display:flex;align-items:center;gap:0.75rem;color:#e2e8f0;font-size:0.95rem"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="#10b981" style="flex-shrink:0"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Estado de pago y saldo en tiempo real</li>
+            <li style="display:flex;align-items:center;gap:0.75rem;color:#e2e8f0;font-size:0.95rem"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="#10b981" style="flex-shrink:0"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Progreso visual del tratamiento</li>
+            <li style="display:flex;align-items:center;gap:0.75rem;color:#e2e8f0;font-size:0.95rem"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="#10b981" style="flex-shrink:0"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Descarga de consentimientos y recetas</li>
+          </ul>
+        </div>
+        <div>
+          <div class="phone-frame">
+            <div class="phone-notch"></div>
+            <div class="phone-screen">
+              <div class="portal-greeting">Hola, María 👋</div>
+              <div class="portal-card">
+                <div class="portal-card-title">Próxima Cita</div>
+                <div class="portal-card-value" style="color:var(--emerald)">05 Ago · 09:00</div>
+                <div style="font-size:0.78rem;color:#6b7280;margin-top:0.25rem">Dra. Villarroel · Corona Porcelana</div>
+              </div>
+              <div class="portal-card">
+                <div class="portal-card-title">Saldo Pendiente</div>
+                <div class="portal-card-value" style="color:var(--gold)">$600.00</div>
+                <div style="font-size:0.78rem;color:#6b7280;margin-top:0.25rem">3 cuotas de $200</div>
+              </div>
+              <div class="portal-card">
+                <div class="portal-card-title">Progreso del Tratamiento</div>
+                <div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:0.25rem">
+                  <div class="portal-card-value" style="color:#06b6d4;font-size:1.1rem">60%</div>
+                  <div style="font-size:0.72rem;color:#6b7280">3 de 5 etapas</div>
+                </div>
+                <div class="portal-progress-bar"><div class="portal-progress-fill" style="width:60%"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -2480,6 +3140,53 @@
       statusDisplay.innerText = `Pieza ${selectedTooth} · ${status.toUpperCase()}`;
     }
 
+    // ── Activity Heatmap Generator ──
+    const heatmapGrid = document.getElementById('heatmapGrid');
+    if (heatmapGrid) {
+      const weeks = 52;
+      const daysPerWeek = 7;
+      for (let w = 0; w < weeks; w++) {
+        for (let d = 0; d < daysPerWeek; d++) {
+          const cell = document.createElement('div');
+          const rand = Math.random();
+          let level;
+          if (rand < 0.15) level = 0;
+          else if (rand < 0.35) level = 1;
+          else if (rand < 0.55) level = 2;
+          else if (rand < 0.78) level = 3;
+          else level = 4;
+          // weekends lighter
+          if (d === 5 || d === 6) level = Math.max(0, level - 2);
+          cell.className = `heat-cell heat-${level}`;
+          cell.title = `Semana ${w + 1}, día ${d + 1}: nivel ${level}`;
+          heatmapGrid.appendChild(cell);
+        }
+      }
+    }
+
+    // ── Patient 360° Hub Tab Switcher ──
+    const hubTabsContainer = document.getElementById('hubTabs');
+    if (hubTabsContainer) {
+      hubTabsContainer.addEventListener('click', function(e) {
+        const tab = e.target.closest('.hub-tab');
+        if (!tab) return;
+        const target = tab.dataset.hub;
+        
+        // Deactivate all tabs
+        hubTabsContainer.querySelectorAll('.hub-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        
+        // Hide all panes
+        const hubContent = hubTabsContainer.closest('.hub-browser').querySelector('.hub-content');
+        hubContent.querySelectorAll('.hub-pane').forEach(p => p.classList.remove('active'));
+        
+        // Show target pane
+        const targetPane = document.getElementById('pane-' + target);
+        if (targetPane) targetPane.classList.add('active');
+      });
+    }
+
   </script>
 </body>
 </html>
+
