@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ClinicOS - El sistema operativo de IA para tu clínica</title>
-  <meta name="description" content="Deje de perder pacientes por desorden operativo. ClinicOS es su recepcionista digital y sistema operativo completo.">
+  <title>Clinic OS — El Sistema Operativo Inteligente para Clínicas</title>
+  <meta name="description" content="Deje de perder pacientes por desorden operativo. Clinic OS es su recepcionista digital, agenda inteligente y gestor clínico.">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -280,10 +280,18 @@
     
     .dashboard-header {
       display: flex;
-      gap: 0.5rem;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
       margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
     }
     
+    .window-dots {
+      display: flex;
+      gap: 0.5rem;
+    }
     .window-dot {
       width: 12px; height: 12px; border-radius: 50%;
       background: #333;
@@ -291,6 +299,26 @@
     .window-dot:nth-child(1) { background: #ff5f56; }
     .window-dot:nth-child(2) { background: #ffbd2e; }
     .window-dot:nth-child(3) { background: #27c93f; }
+
+    .browser-address {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(0,0,0,0.5);
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 0.35rem 1rem;
+      border-radius: 99px;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: #94a3b8;
+      max-width: 320px;
+    }
+    .browser-address svg {
+      width: 13px;
+      height: 13px;
+      color: var(--emerald);
+      flex-shrink: 0;
+    }
 
     .kpi-grid {
       display: grid;
@@ -991,15 +1019,114 @@
       border: 1px solid var(--bone);
     }
     .form-group { margin-bottom: 1.5rem; }
-    .form-label { display: block; margin-bottom: 0.5rem; font-weight: 500; font-size: 0.9rem; }
+    .form-label { display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.9rem; color: #1e293b; }
     .form-input {
-      width: 100%; padding: 0.875rem 1rem; border-radius: 8px; border: 1px solid #d1d5db;
-      font-family: var(--font-sans); transition: 0.2s; background: #f9fafb;
+      width: 100%; padding: 0.875rem 1rem; border-radius: 10px; border: 1px solid #d1d5db;
+      font-family: var(--font-sans); transition: 0.2s; background: #f9fafb; font-size: 0.95rem; color: #0f172a;
     }
     .form-input:focus { outline: none; border-color: var(--emerald); box-shadow: 0 0 0 3px var(--emerald-glow); background: white; }
     .form-status { margin-top: 1rem; padding: 1rem; border-radius: 8px; display: none; font-size: 0.9rem; }
     .form-status.error { display: block; background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
     .form-status.success { display: block; background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; }
+
+    /* Custom Interactive Plan Selector in Form */
+    .plan-cards-selector {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+    @media (max-width: 640px) {
+      .plan-cards-selector {
+        grid-template-columns: 1fr;
+        gap: 0.6rem;
+      }
+    }
+    .plan-select-card {
+      border: 2px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 0.9rem 0.85rem;
+      background: #f8fafc;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      user-select: none;
+    }
+    .plan-select-card:hover {
+      border-color: #cbd5e1;
+      background: #ffffff;
+      transform: translateY(-2px);
+    }
+    .plan-select-card.active {
+      border-color: var(--emerald);
+      background: #ffffff;
+      box-shadow: 0 4px 18px rgba(16, 185, 129, 0.18);
+      transform: translateY(-2px);
+    }
+    .plan-select-radio {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 2px solid #cbd5e1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: 0.2s;
+    }
+    .plan-select-card.active .plan-select-radio {
+      border-color: var(--emerald);
+      background: var(--emerald);
+    }
+    .plan-select-card.active .plan-select-radio::after {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #ffffff;
+    }
+    .plan-select-info {
+      flex-grow: 1;
+      min-width: 0;
+    }
+    .plan-select-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #0f172a;
+      line-height: 1.2;
+    }
+    .plan-select-price {
+      font-size: 1.2rem;
+      font-weight: 800;
+      font-family: var(--font-serif);
+      color: #0a0d14;
+      margin: 2px 0;
+    }
+    .plan-select-sub {
+      font-size: 0.75rem;
+      color: #64748b;
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .plan-badge-mini {
+      position: absolute;
+      top: -8px;
+      right: 10px;
+      background: linear-gradient(135deg, #d4a853, #b88628);
+      color: white;
+      font-size: 0.65rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 2px 8px;
+      border-radius: 99px;
+      box-shadow: 0 2px 6px rgba(212,168,83,0.4);
+    }
 
     /* Footer */
     footer { background: var(--ink); color: white; padding: 4rem 2rem; text-align: center; }
@@ -1056,9 +1183,9 @@
   <section class="hero" data-parallax="0.2">
     <div class="container">
       <div class="hero-content zoom-reveal">
-        <span class="eyebrow">ClinicOS — El sistema operativo de IA para tu clínica.</span>
+        <span class="eyebrow">Clinic OS — El sistema operativo de IA para tu clínica.</span>
         <h1>Deje de perder pacientes por <em>desorden operativo.</em></h1>
-        <p class="hero-subtext">ClinicOS es su recepcionista digital, agenda inteligente y gestor clínico. Todo en una única plataforma diseñada para escalar su práctica.</p>
+        <p class="hero-subtext">Clinic OS es su recepcionista digital, agenda inteligente y gestor clínico. Todo en una única plataforma diseñada para escalar su práctica.</p>
         <div class="hero-ctas">
           <a href="#demo" class="btn btn-primary">Comenzar Prueba Gratis</a>
           <a href="#features" class="btn btn-outline">Explorar Funciones</a>
@@ -1068,9 +1195,16 @@
       <div class="dashboard-wrapper zoom-reveal">
         <div class="dashboard-mockup" id="heroDashboard">
           <div class="dashboard-header">
-            <div class="window-dot"></div>
-            <div class="window-dot"></div>
-            <div class="window-dot"></div>
+            <div class="window-dots">
+              <div class="window-dot"></div>
+              <div class="window-dot"></div>
+              <div class="window-dot"></div>
+            </div>
+            <div class="browser-address">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><rect x="3" y="11" width="18" height="11" rx="2" ry="2" stroke-width="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4" stroke-width="2"></path></svg>
+              <span>https://app.clinicos.com/dashboard</span>
+            </div>
+            <div style="width: 52px;"></div>
           </div>
           
           <div class="kpi-grid">
@@ -1620,12 +1754,41 @@
             <input type="text" id="clinica" class="form-input" required>
           </div>
           <div class="form-group">
-            <label class="form-label" for="plan">Plan de Interés</label>
-            <select id="plan" class="form-input" required>
-              <option value="starter">Starter ($49/mes)</option>
-              <option value="pro" selected>Profesional ($99/mes)</option>
-              <option value="elite">Elite (Personalizado)</option>
-            </select>
+            <label class="form-label" style="display:flex; justify-content:space-between; align-items:center;">
+              <span>Plan de Interés</span>
+              <span style="font-size:0.8rem; color:var(--emerald); font-weight:600;">⚡ 7 días de prueba gratis</span>
+            </label>
+            <input type="hidden" id="plan" name="plan" value="pro">
+            <div class="plan-cards-selector">
+              <!-- Starter -->
+              <div class="plan-select-card" data-plan="starter" onclick="chooseFormPlan('starter')">
+                <div class="plan-select-radio"></div>
+                <div class="plan-select-info">
+                  <div class="plan-select-title">Starter</div>
+                  <div class="plan-select-price">$49<span style="font-size:0.75rem; color:#64748b; font-family:var(--font-sans); font-weight:500;">/m</span></div>
+                  <div class="plan-select-sub">1 Doctor · 300 pac.</div>
+                </div>
+              </div>
+              <!-- Pro (Default) -->
+              <div class="plan-select-card active" data-plan="pro" onclick="chooseFormPlan('pro')">
+                <div class="plan-badge-mini">Popular</div>
+                <div class="plan-select-radio"></div>
+                <div class="plan-select-info">
+                  <div class="plan-select-title">Profesional</div>
+                  <div class="plan-select-price">$99<span style="font-size:0.75rem; color:#64748b; font-family:var(--font-sans); font-weight:500;">/m</span></div>
+                  <div class="plan-select-sub">5 Doctores · Todo Ilim.</div>
+                </div>
+              </div>
+              <!-- Elite -->
+              <div class="plan-select-card" data-plan="elite" onclick="chooseFormPlan('elite')">
+                <div class="plan-select-radio"></div>
+                <div class="plan-select-info">
+                  <div class="plan-select-title">Elite</div>
+                  <div class="plan-select-price" style="font-size:1.05rem; margin:4px 0 2px;">Custom</div>
+                  <div class="plan-select-sub">Multi-clínica · SLA</div>
+                </div>
+              </div>
+            </div>
           </div>
           <button type="submit" class="btn btn-primary" style="width:100%">Iniciar Prueba Gratis 7 Días &rarr;</button>
           
@@ -1801,12 +1964,29 @@
       container.querySelector('#' + tabId).classList.add('active');
     };
 
-    // Form Handle
+    // Form & Plan Handle
+    window.chooseFormPlan = function(planId) {
+      const planInput = document.getElementById('plan');
+      if (planInput) planInput.value = planId;
+      document.querySelectorAll('.plan-select-card').forEach(card => {
+        if (card.dataset.plan === planId) {
+          card.classList.add('active');
+        } else {
+          card.classList.remove('active');
+        }
+      });
+    };
+
     window.selectPlan = function(planId) {
-      document.getElementById('plan').value = planId;
+      chooseFormPlan(planId);
       const demoSection = document.getElementById('demo');
-      demoSection.scrollIntoView({ behavior: 'smooth' });
-      setTimeout(() => document.getElementById('nombre').focus(), 800);
+      if (demoSection) {
+        demoSection.scrollIntoView({ behavior: 'smooth' });
+        setTimeout(() => {
+          const nameInput = document.getElementById('nombre');
+          if (nameInput) nameInput.focus();
+        }, 700);
+      }
     };
 
     window.handleFormSubmit = function(e) {
