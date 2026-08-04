@@ -1330,7 +1330,7 @@
             <li>Agenda inteligente integrada</li>
             <li>WhatsApp integrado básico</li>
           </ul>
-          <button type="button" class="btn tier-btn" data-plan="Starter">Solicitar Demo</button>
+          <button type="button" class="btn tier-btn" data-plan="Starter">Comenzar 7 Días Gratis</button>
         </div>
         <!-- Tier 2 -->
         <div class="tier pro">
@@ -1345,13 +1345,13 @@
             <li>Generador de cotizaciones rápidas</li>
             <li>Asistente WhatsApp 24/7 (Recepción)</li>
           </ul>
-          <button type="button" class="btn tier-btn" data-plan="Profesional">Solicitar Demo</button>
+          <button type="button" class="btn tier-btn" data-plan="Profesional">Comenzar 7 Días Gratis</button>
         </div>
         <!-- Tier 3 -->
         <div class="tier enterprise">
           <span class="tier-name">Elite / Clinic</span>
           <p class="tier-desc">Para centros médicos y redes de clínicas con requerimientos de customización y alta escala.</p>
-          <div class="tier-price">Consultar</div>
+          <div class="tier-price">Personalizado</div>
           <ul>
             <li>Cuentas de profesionales ilimitadas</li>
             <li>Soporte y onboarding dedicado 24/7</li>
@@ -1361,7 +1361,7 @@
           <button type="button" class="btn tier-btn" data-plan="Enterprise">Contactar Ventas</button>
         </div>
       </div>
-      <p class="pricing-disclaimer">Algunas funciones avanzadas están en fase de lanzamiento progresivo.</p>
+      <p class="pricing-disclaimer">⚡ 7 días de prueba gratis en todos los planes. Cancelá en cualquier momento antes del día 8 sin cargo.</p>
     </div>
   </section>
 
@@ -1369,37 +1369,35 @@
   <section class="demo-sec reveal" id="demo">
     <div class="wrap demo-grid">
       <div>
-        <span class="eyebrow">Comenzar hoy</span>
-        <h2>Prueba ClinicOS gratis con nuestro equipo.</h2>
-        <p style="margin:20px 0; font-size:15px; opacity:0.85;">Agenda una llamada guiada de 15 minutos. Te configuramos la plataforma para tu consultorio y podrás probar de manera gratuita todos los módulos durante 14 días.</p>
-        <p style="font-size:15px; opacity:0.85;">Descubre cómo modernizar la ficha odontológica y ahorrar tiempo desde la primera cita.</p>
+        <span class="eyebrow">Prueba Gratuita</span>
+        <h2>Iniciá tus 7 días de prueba gratis hoy.</h2>
+        <p style="margin:20px 0; font-size:15px; opacity:0.85;">Completá tus datos para ingresar al asistente de configuración de tu clínica y comenzar a usar el software médico al instante.</p>
+        <p style="font-size:15px; opacity:0.85;">Sin costos ocultos. $0 cobrados hoy. Tu software médico listo en menos de 1 minuto.</p>
       </div>
 
       <div class="demo-form-wrap">
-        <form id="clinic-demo-form" action="https://formspree.io/f/TU_FORM_ID" method="POST">
+        <form id="clinic-demo-form" action="/onboarding" method="GET">
           <div class="field">
-            <label for="nombre">Nombre completo</label>
-            <input id="nombre" name="nombre" type="text" placeholder="Ej. Dr. Carlos Villarroel" required>
+            <label for="nombre">Nombre completo del Doctor/a</label>
+            <input id="nombre" name="nombre" type="text" placeholder="Ej. Dra. Solange Villarroel" required>
           </div>
           <div class="field">
-            <label for="whatsapp">WhatsApp / Teléfono</label>
-            <input id="whatsapp" name="whatsapp" type="tel" placeholder="Ej. +54 9 11 xxxx xxxx" required>
+            <label for="whatsapp">WhatsApp de contacto</label>
+            <input id="whatsapp" name="whatsapp" type="tel" placeholder="Ej. +591 7xxxxxxx" required>
           </div>
           <div class="field">
             <label for="clinica">Nombre de tu Clínica</label>
-            <input id="clinica" name="clinica" type="text" placeholder="Ej. Clínica Dental Villarroel" required>
+            <input id="clinica" name="clinica" type="text" placeholder="Ej. Clínica Dental San Lucas" required>
           </div>
           <div class="field">
-            <label for="plan">Plan de interés</label>
+            <label for="plan">Plan seleccionado (7 días gratis)</label>
             <select id="plan" name="plan">
-              <option value="">Sin especificar</option>
-              <option value="Starter">Starter</option>
-              <option value="Profesional">Profesional</option>
-              <option value="Enterprise">Elite / Clinic</option>
+              <option value="Profesional">Profesional ($99/mes - 7 días gratis)</option>
+              <option value="Starter">Starter ($49/mes - 7 días gratis)</option>
+              <option value="Enterprise">Elite / Clinic (A medida)</option>
             </select>
           </div>
-          <input type="hidden" name="_subject" value="Nueva solicitud de Demo ClinicOS">
-          <button class="btn" type="submit">Solicitar Demostración</button>
+          <button class="btn" type="submit">Iniciar Prueba Gratis 7 Días →</button>
           <p class="form-status" role="status" aria-live="polite"></p>
         </form>
       </div>
